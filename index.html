@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التقرير الاستراتيجي - التنين الذكي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 320px; max-height: 400px; }
+        .card { background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); }
+        .accent-vibrant { color: #f97316; }
+        .bg-vibrant { background-color: #f97316; }
+        .step-circle { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #0ea5e9; color: white; font-weight: bold; }
+        @media (max-width: 768px) { .chart-container { height: 280px; } }
+    </style>
+</head>
+<body>
+    <!-- 
+    Palette Name: Energetic & Playful (Modified for Corporate Vibrancy)
+    Colors used: 
+    - Orange (Vibrant): #f97316
+    - Sky Blue: #0ea5e9
+    - Slate/Navy: #1e293b
+    - Emerald: #10b981
+    - Rose: #f43f5e
+    -->
+
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 shadow-sm">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-2xl font-800 text-slate-800">التنين <span class="accent-vibrant">الذكي</span> <span class="text-sm font-normal text-slate-500 mr-2">| التحليل التنافسي الأردن</span></h1>
+            <div class="hidden md:flex gap-6 text-sm font-semibold">
+                <a href="#swot" class="hover:text-orange-500 transition">تحليل SWOT</a>
+                <a href="#pricing" class="hover:text-orange-500 transition">استراتيجية التسعير</a>
+                <a href="#gaps" class="hover:text-orange-500 transition">فجوات السوق</a>
+                <a href="#action" class="bg-vibrant text-white px-4 py-2 rounded-full hover:opacity-90 transition">خطة العمل</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-8">
+        <!-- Header Section -->
+        <header class="mb-12 text-center">
+            <div class="inline-block bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm font-bold mb-4">تقرير تحديث يوليو 2026</div>
+            <h2 class="text-4xl font-800 mb-4 text-slate-900">الرؤية الاستراتيجية للهيمنة على قطاع إكسسوارات السيارات</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto">تحليل شامل يعتمد على بيانات "تقرير المنافسين" لشركات (Double M) و (الربيع) لتحديد المسار النمو الأمثل لشركة التنين الذكي.</p>
+        </header>
+
+        <!-- SWOT Section -->
+        <section id="swot" class="mb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-8 w-2 bg-orange-500 rounded-full"></div>
+                <h3 class="text-2xl font-700">مصفوفة SWOT المخصصة (بناءً على تحركات المنافسين)</h3>
+            </div>
+            <p class="mb-8 text-slate-600">بناءً على تتبع حملات المنافسين، قمنا بصياغة مصفوفة SWOT التي تحول نقاط قوة المنافسين إلى فرص لنا ونقاط ضعفهم إلى ميزات تنافسية.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card p-6 border-t-4 border-emerald-500">
+                    <h4 class="font-800 text-emerald-600 mb-2">نقاط القوة (المنافسين)</h4>
+                    <p class="text-sm leading-relaxed">تكامل خدمات الصيانة لدى Double M (تكييف/كهرباء) والقدرة العالية على حرق الأسعار لدى الربيع (3 قطع < 30 دينار).</p>
+                </div>
+                <div class="card p-6 border-t-4 border-rose-500">
+                    <h4 class="font-800 text-rose-600 mb-2">نقاط الضعف (المنافسين)</h4>
+                    <p class="text-sm leading-relaxed">الاعتماد على عروض اليوم الواحد (الأربعاء فقط)، وضعف جودة الضمان، والتركيز على التركيب التقليدي داخل المركز فقط.</p>
+                </div>
+                <div class="card p-6 border-t-4 border-orange-500 bg-orange-50/30">
+                    <h4 class="font-800 text-orange-600 mb-2">الفرص (للتنين الذكي)</h4>
+                    <p class="text-sm leading-relaxed">التوسع في مستلزمات BYD والسيارات الكهربائية، وتقديم خدمة التركيب المنزلي، وضمان ممتد حقيقي (سنة كاملة).</p>
+                </div>
+                <div class="card p-6 border-t-4 border-slate-700">
+                    <h4 class="font-800 text-slate-700 mb-2">التهديدات</h4>
+                    <p class="text-sm leading-relaxed">خسارة العملاء الحساسين للسعر لصالح عروض "الربيع" الهجومية في حال لم يتم تعديل هوامش الربح للأصناف الأساسية.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Strategy Section -->
+        <section id="pricing" class="mb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-8 w-2 bg-sky-500 rounded-full"></div>
+                <h3 class="text-2xl font-700 text-slate-800">توصيات استراتيجية التسعير (Pricing)</h3>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-slate-600 mb-6 leading-relaxed text-lg">أظهر تحليل "تقرير المنافسين" أن شركة (الربيع) تستخدم استراتيجية <strong>Price Anchoring</strong> لكسر حاجز الـ 40 دينار إلى 30 دينار. نوصي بتطبيق "نموذج التسعير المزدوج":</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="bg-rose-100 p-1 rounded">📉</div>
+                            <div>
+                                <span class="font-bold block text-rose-600">تخفيض فوري (عدواني):</span>
+                                <span class="text-sm">لزقات السيكوريت لسيارات BYD، وأنظمة الليد ULTRA SONIC لمواجهة عروض الـ 30 دينار.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="bg-emerald-100 p-1 rounded">📈</div>
+                            <div>
+                                <span class="font-bold block text-emerald-600">الحفاظ على الهامش (35-45%):</span>
+                                <span class="text-sm">الجالونات المقاومة للانفجار، المواد الكيميائية (Armor All)، وأرضيات الجلد الفاخرة (Double M).</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-8">
+                    <h4 class="text-center font-700 mb-6">مقارنة الأسعار المقترحة vs المنافسين</h4>
+                    <div class="chart-container">
+                        <canvas id="pricingChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Gaps Section -->
+        <section id="gaps" class="mb-16 bg-slate-900 text-white p-12 rounded-[2rem] shadow-2xl overflow-hidden relative">
+            <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="h-8 w-2 bg-orange-500 rounded-full"></div>
+                    <h3 class="text-2xl font-700">فجوات المنتجات: ماذا يجب أن نستورد فوراً؟</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
+                        <div class="text-3xl mb-4">📱</div>
+                        <h4 class="font-800 text-orange-400 mb-2 text-xl">درع BYD الذكي</h4>
+                        <p class="text-sm text-slate-300">سيكوريت وحماية شاشات مخصصة لأكثر السيارات مبيعاً حالياً. المنافس (الربيع) يوفرها الآن وبكثافة.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
+                        <div class="text-3xl mb-4">🔊</div>
+                        <h4 class="font-800 text-sky-400 mb-2 text-xl">أنظمة Ultra Sonic</h4>
+                        <p class="text-sm text-slate-300">تعد سماعات وإضاءات الأبواب ذات الأجنحة الضوئية هي "الترند" الحالي بين فئة الشباب (تتبع الربيع/Double M).</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
+                        <div class="text-3xl mb-4">🔋</div>
+                        <h4 class="font-800 text-emerald-400 mb-2 text-xl">حاويات PE الآمنة</h4>
+                        <p class="text-sm text-slate-300">جالونات البولي إيثيلين المقاومة للانفجار. منتج نادر عالي الربحية يركز عليه (Double M) استراتيجياً.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Gaps Section -->
+        <section class="mb-16">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="h-8 w-2 bg-emerald-500 rounded-full"></div>
+                <h3 class="text-2xl font-700">التميز بالخدمات (Service Superiority)</h3>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="card p-8 flex flex-col items-center text-center">
+                    <h4 class="font-800 text-xl mb-4 text-slate-800">توزيع تركيز خدمات المنافسين</h4>
+                    <p class="text-sm text-slate-500 mb-6">يوضح الرادار التالي أين يركز المنافسون وأين تكمن "الفجوة الزرقاء" لشركة التنين الذكي.</p>
+                    <div class="chart-container">
+                        <canvas id="serviceRadar"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="p-6 bg-white border-r-4 border-orange-500 shadow-sm rounded-lg">
+                        <h5 class="font-800 text-orange-600 mb-1">التركيب السريع المتنقل (Mobile Quick-Fit)</h5>
+                        <p class="text-sm text-slate-600">حل مشكلة وقت الانتظار الطويل لدى المنافسين بتقديم التركيب في موقع العميل.</p>
+                    </div>
+                    <div class="p-6 bg-white border-r-4 border-sky-500 shadow-sm rounded-lg">
+                        <h5 class="font-800 text-sky-600 mb-1">كفالة التنين الممتدة (Extended Warranty)</h5>
+                        <p class="text-sm text-slate-600">ضمان سنة كاملة حقيقي وموثق على إكسسوارات الإضاءة، يتجاوز ضمان المنافسين التقليدي.</p>
+                    </div>
+                    <div class="p-6 bg-white border-r-4 border-slate-800 shadow-sm rounded-lg">
+                        <h5 class="font-800 text-slate-800 mb-1">الفحص المجاني الذكي للداخلية</h5>
+                        <p class="text-sm text-slate-600">قيمة مضافة مع كل عملية شراء > 25 دينار، لربط العميل عاطفياً بالعلامة التجارية.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Plan Section -->
+        <section id="action" class="mb-16 border-t pt-16">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-800 mb-4">خطة العمل الفورية (Action Plan)</h3>
+                <p class="text-slate-500 italic">خمس خطوات حاسمة للتنفيذ هذا الأسبوع بناءً على التحليل التنافسي.</p>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-8 relative">
+                <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-slate-200 hidden md:block"></div>
+                
+                <div class="flex flex-col md:flex-row items-center gap-8 relative">
+                    <div class="flex-1 text-center md:text-left order-2 md:order-1">
+                        <h5 class="font-800 text-lg">إطلاق حملة "تحطيم الأسعار"</h5>
+                        <p class="text-sm text-slate-500 mt-1">تعديل أسعار لزقات السيكوريت لمطابقة الربيع فوراً.</p>
+                    </div>
+                    <div class="step-circle relative z-10 order-1">1</div>
+                    <div class="flex-1 order-3 hidden md:block"></div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center gap-8 relative">
+                    <div class="flex-1 order-1 hidden md:block"></div>
+                    <div class="step-circle relative z-10 order-1 md:order-2">2</div>
+                    <div class="flex-1 text-center md:text-right order-2 md:order-3">
+                        <h5 class="font-800 text-lg">تأمين مخزون BYD</h5>
+                        <p class="text-sm text-slate-500 mt-1">التواصل مع الموردين لشحن دفعات طارئة من حمايات الشاشات.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center gap-8 relative">
+                    <div class="flex-1 text-center md:text-left order-2 md:order-1">
+                        <h5 class="font-800 text-lg">التسويق التجريبي (Reels)</h5>
+                        <p class="text-sm text-slate-500 mt-1">تصوير فيديوهات مقارنة جودة للأرضيات والجلود (تيك توك/فيسبوك).</p>
+                    </div>
+                    <div class="step-circle relative z-10 order-1">3</div>
+                    <div class="flex-1 order-3 hidden md:block"></div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center gap-8 relative">
+                    <div class="flex-1 order-1 hidden md:block"></div>
+                    <div class="step-circle relative z-10 order-1 md:order-2">4</div>
+                    <div class="flex-1 text-center md:text-right order-2 md:order-3">
+                        <h5 class="font-800 text-lg">تفعيل "كفالة التنين"</h5>
+                        <p class="text-sm text-slate-500 mt-1">إعلان رسمي عن الضمان الممتد لخلق ميزة تنافسية نوعية.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center gap-8 relative">
+                    <div class="flex-1 text-center md:text-left order-2 md:order-1">
+                        <h5 class="font-800 text-lg">رفع هوامش الأصناف الفريدة</h5>
+                        <p class="text-sm text-slate-500 mt-1">تعديل سعر الجالونات المتخصصة لتعويض خصومات المنتجات التنافسية.</p>
+                    </div>
+                    <div class="step-circle relative z-10 order-1">5</div>
+                    <div class="flex-1 order-3 hidden md:block"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-white py-12 px-6">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-right">
+                <p class="text-xl font-800">التنين الذكي</p>
+                <p class="text-slate-400 text-sm">كبير مستشاري الأعمال ومحلل البيانات الاستراتيجي</p>
+            </div>
+            <div class="text-center text-sm text-slate-500">
+                &copy; 2026 التنين الذكي - التحليل الاستراتيجي التنافسي.
+            </div>
+        </div>
+    </footer>
+
+    <!-- 
+    No Mermaid JS used for diagrams.
+    No SVG graphics used for icons (Unicode/Tailwind only).
+    Chart.js used for Canvas rendering with label wrapping and tooltip configuration.
+    -->
+
+    <script>
+        // Data Processing: Label Wrapping Logic
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        // Shared Tooltip Config
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // 1. Pricing Bar Chart
+        const pricingCtx = document.getElementById('pricingChart').getContext('2d');
+        new Chart(pricingCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('باقة ليزر (3 قطع)'),
+                    wrapLabel('سيكوريت شاشة BYD'),
+                    wrapLabel('جالون PE متخصص'),
+                    wrapLabel('أرضيات جلد ألماني')
+                ],
+                datasets: [
+                    {
+                        label: 'سعر المنافس (JD)',
+                        data: [40, 15, 25, 45],
+                        backgroundColor: '#94a3b8'
+                    },
+                    {
+                        label: 'سعر التنين الذكي (JD)',
+                        data: [29, 12, 32, 42],
+                        backgroundColor: '#f97316'
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { display: false } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 2. Service Gap Radar Chart
+        const radarCtx = document.getElementById('serviceRadar').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    wrapLabel('تنوع المنتجات'),
+                    wrapLabel('خدمات الصيانة'),
+                    wrapLabel('سهولة التركيب'),
+                    wrapLabel('جودة الضمان'),
+                    wrapLabel('سعر تنافسي'),
+                    wrapLabel('خدمة منزلية')
+                ],
+                datasets: [
+                    {
+                        label: 'متوسط المنافسين',
+                        data: [85, 90, 40, 30, 95, 10],
+                        borderColor: '#cbd5e1',
+                        backgroundColor: 'rgba(203, 213, 225, 0.2)',
+                        pointBackgroundColor: '#64748b'
+                    },
+                    {
+                        label: 'مستهدف التنين الذكي',
+                        data: [90, 40, 95, 90, 80, 100],
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14, 165, 233, 0.2)',
+                        pointBackgroundColor: '#0284c7'
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
