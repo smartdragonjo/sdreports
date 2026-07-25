@@ -3,569 +3,493 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="auth.js"></script>
-    <title>تقرير تحليل المنافسين - إكسسوارات السيارات</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <title>تقرير تحليل منافسي قطاع إكسسوارات السيارات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0f172a;
-            --secondary: #1e293b;
-            --accent: #f97316;
-            --light: #f8fafc;
-            --border: #e2e8f0;
-            --text-main: #334155;
-            --text-light: #64748b;
+            --primary-color: #1e3a5f;
+            --secondary-color: #f4b41a;
+            --accent-color: #e63946;
+            --bg-color: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --light-text: #666666;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-hover: 0 10px 15px rgba(0,0,0,0.1);
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--light);
-            color: var(--text-main);
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
-        .report-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #15293f);
             color: white;
             padding: 40px 20px;
             text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .report-header h1 {
-            font-size: 2.5rem;
+        header h1 {
+            font-size: 2.5em;
             margin-bottom: 10px;
             font-weight: 800;
         }
 
-        .report-header p {
-            font-size: 1.1rem;
+        header p {
+            font-size: 1.1em;
             opacity: 0.9;
         }
 
+        /* Container */
         .container {
-            max-width: 1000px;
-            margin: -30px auto 40px;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 0 20px;
         }
 
+        /* Competitor Title */
         .competitor-section {
-            background: white;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            border: 1px solid var(--border);
+            margin-bottom: 50px;
         }
 
         .competitor-title {
-            background-color: var(--secondary);
-            color: white;
-            padding: 15px 20px;
-            font-size: 1.4rem;
-            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
         }
 
-        .competitor-title::before {
-            content: '';
-            display: block;
-            width: 8px;
-            height: 25px;
-            background-color: var(--accent);
-            border-radius: 4px;
+        .competitor-title h2 {
+            font-size: 1.5em;
+            font-weight: 700;
         }
 
-        .post-card {
-            padding: 20px;
-            border-bottom: 1px solid var(--border);
+        .competitor-badge {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9em;
         }
 
-        .post-card:last-child {
-            border-bottom: none;
+        /* Report Card */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e1e8ed;
         }
 
-        .post-meta {
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: var(--text-light);
+            align-items: center;
+            padding: 15px 25px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e1e8ed;
         }
 
-        .post-date {
-            background: #f1f5f9;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        .post-details {
-            background: #fff7ed;
-            border-right: 4px solid var(--accent);
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            border-radius: 4px;
+        .card-date {
+            color: var(--light-text);
             font-weight: 600;
-            color: #9a3412;
+            font-size: 0.95em;
         }
 
-        .post-content {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 20px;
+        .card-caption {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1em;
+        }
+
+        .card-body {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .media-section {
+            flex: 1 1 300px;
+            margin-left: 20px;
             margin-bottom: 20px;
         }
 
-        @media (max-width: 600px) {
-            .post-content {
-                grid-template-columns: 1fr;
-            }
-            .post-img {
-                width: 100% !important;
-                height: auto !important;
-            }
-        }
-
-        .post-img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
+        .media-section img {
+            width: 100%;
             border-radius: 8px;
-            border: 1px solid var(--border);
-            background-color: #f1f5f9;
+            height: auto;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
         }
 
-        .post-link {
+        .watch-link {
             display: inline-block;
-            margin-top: 10px;
-            color: var(--accent);
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .post-link:hover {
-            text-decoration: underline;
-        }
-
-        .analysis-box {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .analysis-title {
+            border-radius: 5px;
             font-weight: 700;
-            color: var(--primary);
+            transition: background-color 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .watch-link:hover {
+            background-color: #c1121f;
+        }
+
+        .content-section {
+            flex: 2 1 600px;
+        }
+
+        .content-block {
+            margin-bottom: 20px;
+            background-color: #fdfdfd;
+            border-right: 4px solid var(--secondary-color);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-block h3 {
+            color: var(--primary-color);
             margin-bottom: 10px;
-            font-size: 1.1rem;
+            font-size: 1.1em;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .transcript {
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            color: #475569;
-            white-space: pre-wrap;
-            background: white;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px dashed var(--border);
-        }
-
-        .strategy-list {
-            list-style: none;
-        }
-
-        .strategy-list li {
+        .content-block p, .content-block li {
+            color: #444;
+            font-size: 0.95em;
             margin-bottom: 8px;
-            padding-right: 15px;
-            position: relative;
-            color: var(--text-main);
         }
 
-        .strategy-list li::before {
-            content: '•';
-            color: var(--accent);
-            font-weight: bold;
-            position: absolute;
-            right: 0;
+        .content-block ul {
+            list-style-position: inside;
+            padding-right: 10px;
         }
 
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-light);
-            font-size: 0.9rem;
+        .transcript {
+            background-color: #eef2f7;
+            border-right-color: var(--primary-color);
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card-body {
+                flex-direction: column;
+            }
+            .media-section {
+                margin-left: 0;
+                width: 100%;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            .watch-link {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header class="report-header">
-        <h1>تقرير تحليل المنافسين</h1>
-        <p>تحليل استراتيجي لمحتوى منافسي قطاع إكسسوارات وزينة السيارات على منصات التواصل الاجتماعي</p>
+    <header>
+        <h1>تقرير تحليل منافسي قطاع إكسسوارات السيارات</h1>
+        <p>تحليل استراتيجي لمحتوى الفيديو والتسويق الرقمي للمنافسين</p>
     </header>
 
     <div class="container">
+        <p style="margin-bottom: 30px; font-size: 1.1em; color: #555; text-align: center;">
+            يقدم هذا التقرير تحليلاً مفصلاً للتفريغ الصوتي والملخص الاستراتيجي لمنشورات منافسيك على منصات التواصل الاجتماعي (فيسبوك وإنستغرام)، مصنفة حسب العلامة التجارية لكل منافس.
+        </p>
 
-        <!-- المنافس الأول: Double M -->
-        <section class="competitor-section">
-            <div class="competitor-title">Double M For Cars Accessories</div>
+        <!-- ========================================== -->
+        <!-- المنافس: Double M For Cars Accessories -->
+        <!-- ========================================== -->
+        <div class="competitor-section">
+            <div class="competitor-title">
+                <h2>Double M For Cars Accessories</h2>
+                <span class="competitor-badge">إكسسوارات وصيانة سيارات</span>
+            </div>
 
-            <!-- Post 1 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
+            <!-- المنشور 1 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-caption">تحقق الي طلبتوه ✨️🥹</span>
+                    <span class="card-date">23 يوليو 2026</span>
                 </div>
-                <div class="post-details">من افضل أنواع الأرضيات يلي رح تركب على سيارتك😎🚗</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-sea5-1.xx.fbcdn.net/v/t51.82787-10/755264122_18360030127215801_1290979106963380731_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=111&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=JXtjsqAVZd8Q7kNvwGlOi7n&_nc_oc=AdooOrgmRULcLN17hqghnxM_SpznXRIOimjjleSZF0gmykS8xSHdlmY3tMSpvG0LwNM&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&_nc_gid=R0J6ZJ3Pj1B11B79B1GX_A&_nc_ss=7b289&oh=00_AQBhSg9khr0K0EFwSScc_2wxlpPQOxWVGwzp_4yRAMwPdA&oe=6A66D5D2" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/1662816678116298/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
+                <div class="card-body">
+                    <div class="media-section">
+                        <img src="https://scontent-lga3-2.xx.fbcdn.net/v/t51.71878-10/753306335_2315468149267026_7679518317772516281_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=101&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=U2bOsNPKWVMQ7kNvwGmgiWy&_nc_oc=AdrV8SvQwAPxgbtVZoT0ydEAKyHtOpkJly3afs45Xv4yhl7LszHhIiulSZDlRqTjCbI&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=RHGalPl6MoZUGOd8Vp0O_g&_nc_ss=7b289&oh=00_AQD9RNOFooQf9KBC0RrN5lb6D5qviYLzM9yaFsPL24T0uA&oe=6A6869E7" alt="Post Image">
+                        <a href="https://www.facebook.com/reel/1566889311610309/" target="_blank" class="watch-link">مشاهدة الفيديو الأصلي</a>
                     </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"شوف بالملح... مو ميمو، هاي هي أرضيات، سكسس، أفخم أرضية على مستوى المملكة، بس ما بتلاقيها إلا بالدبل إم. متوفر بالفرع عند دوار الحويه، والفور ريمو. ولما تحمي أرضية سيارتك، تعال احميها بمنتج أصلي مخصص."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>عنصر الجذب:</strong> التكرار السريع والمكثف لكسر نمط التصفح.</li>
-                            <li><strong>القيمة المقترحة:</strong> التركيز على الفخامة والحصرية.</li>
-                            <li><strong>التسويق المكاني:</strong> تحديد الفروع مباشرة لتقليل الفجوة.</li>
-                            <li><strong>أسلوب الإقناع:</strong> تحويل المنتج لـ "ضرورة حماية" بدلاً من تجميل.</li>
-                        </ul>
+                    <div class="content-section">
+                        <div class="content-block transcript">
+                            <h3>التفريغ الصوتي 🎙️</h3>
+                            <p>"وأخيراً صار اللي طلبتوه.. نزل سعر أفخم فرش بالعالم، لكن فقط لثلاث أيام، فرش جي بي.. صناعة تركية بخامات قوية وقصات حديثة وألوان رهيبة، بركب على كل السيارات وبغير الداخلية بالكامل. صار عليه خصم قوي من الخميس ليوم السبت، والخصم 30 بالمية على فرشات جي بي. وهذا العرض راح يكون بالفرعين مقابل دوار الاحويان ومقابل حرية، فـ شو بتستنى؟"</p>
+                        </div>
+                        <div class="content-block">
+                            <h3>الملخص الاستراتيجي 📊</h3>
+                            <ul>
+                                <li><strong>التسويق بالإلحاح (Urgency Marketing):</strong> استخدام خصم 30% لمدة 3 أيام فقط لخلق دافع فوري (FOMO).</li>
+                                <li><strong>تلبية رغبة الجمهور:</strong> البدء بعبارة "وأخيراً صار اللي طلبتوه" لتعزيز العلاقة مع المتابعين.</li>
+                                <li><strong>القيمة مقابل السعر:</strong> التركيز على المزايا التنافسية (صناعة تركية، متانة، قصات حديثة).</li>
+                                <li><strong>تحديد النطاق الجغرافي:</strong> وضوح أماكن البيع لتسهيل قرار الشراء.</li>
+                                <li><strong>الدعوة لاتخاذ إجراء (CTA):</strong> اختتام الفيديو بعبارة "شو بتستنى؟" لتحفيز التحرك الفوري.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Post 2 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
+            <!-- المنشور 2 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-caption">‏أفضل وأقوى فرش ممكن يركب على سيارتك...</span>
+                    <span class="card-date">23 يوليو 2026</span>
                 </div>
-                <div class="post-details">جالون متعدد الاستخدام للمواد المشتعله او الماء 🔥🔥</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-dfw6-1.xx.fbcdn.net/v/t51.82787-10/753990721_18360044530215801_6137859867912121306_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=102&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=vkj3gNQ0tRoQ7kNvwHZ8JJ5&_nc_oc=Adqu9jFn4ruw8_N2rJpHyZn6YfLewQ5TT4RZEdOnrN6I3EnvtD79A6GDmY1zqPv48dc&_nc_zt=23&_nc_ht=scontent-dfw6-1.xx&_nc_gid=ap6eVWTfsUuHXmBsqQ8IwQ&_nc_ss=7b289&oh=00_AQAe9_S94gthtFNn5mpXCVwiY-E6jbtQmO5-cA_VXilUQw&oe=6A66DC97" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/2125204465078985/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
+                <div class="card-body">
+                    <div class="media-section">
+                        <img src="https://scontent-fra5-2.xx.fbcdn.net/v/t51.82787-10/754143288_18360213583215801_2416234978730475798_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=109&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=YQ64aj18wRgQ7kNvwFJFJvP&_nc_oc=Adr-Tcg_oV9D4HQM8yQ95UkywHGUKeII1Ns_nKMe_2FAKyQFXGhhu5OvTNutqQilKnk&_nc_zt=23&_nc_ht=scontent-fra5-2.xx&_nc_gid=cWEa7v73eP69eqJCpdIO-g&_nc_ss=7b289&oh=00_AQAla3OYqtQZzVxNeYqum43hOawt3rdYWRADrrECkEbkWQ&oe=6A690184" alt="Post Image">
+                        <a href="https://www.facebook.com/reel/1749417656513710/" target="_blank" class="watch-link">مشاهدة الفيديو الأصلي</a>
                     </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"حتى للانفجار هاي المادة مقاومة... مصنوع من البولي إيثيلين... حلوة للي بيطلعوا أوف رود... شايف هاد النوزل؟ بتقدر تضبه... متوفر 5، 10، 20 لتر وحديد مقاوم للصدأ. اكتب لي جالون بالتعليقات."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>طرح المشكلة والحل:</strong> الحديث عن خاصية مقاومة الانفجار لإثارة الفضول.</li>
-                            <li><strong>التركيز على الفائدة:</strong> ربط المنتج بحالات استخدام يومية (رحلات، طوارئ).</li>
-                            <li><strong>توضيح ميزات التصميم:</strong> عرض طية الفوهة لتوفير المساحة.</li>
-                            <li><strong>استراتيجية التفاعل:</strong> "اكتب لي جالون" لزيادة معدل التفاعل.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Post 3 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
-                </div>
-                <div class="post-details">لو سيارتك بحاجه لصيانه الدبل ام بوفرلك قسم صيانه كامل 🚗👌</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/753541325_18360049057215801_6724584860736727174_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=103&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=-x6jg6PM6rMQ7kNvwG0Se7L&_nc_oc=Adqy98a8AU9NKMFozmDS763NYCd5i-09nc8jk2NY6V8Szquul1tFKoY8pWwmBO-2AMOtkUMjjr7BIXuhOR03slgd&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=Q_DLKZ3gEtXIDcqRuqv3dQ&_nc_ss=7b289&oh=00_AQAOCq-u0EZDNq85xaS3OJSx2Q5VGf6AC3vsLps47jURZg&oe=6A670E24" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/799367166535678/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
-                    </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"عندك تهريب؟ مشكلة في التكييف؟ بنفحصلك إياه... بنسحبلك الغاز القديم عن طريق ماكينة Würth... بنعطيك كفالات حقيقية على شغل مختصين معارض ديبن. اكتب لي شو بدها سيارتك؟"</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>بناء السلطة الفنية:</strong> استخدام معدات متخصصة (Würth) لرسالة جودة عالية.</li>
-                            <li><strong>عامل الكفالة:</strong> تقديم ضمانات لبناء الثقة.</li>
-                            <li><strong>تحفيز التفاعل:</strong> أسئلة مفتوحة لزيادة التعليقات والتفاعل.</li>
-                        </ul>
+                    <div class="content-section">
+                        <div class="content-block transcript">
+                            <h3>التفريغ الصوتي 🎙️</h3>
+                            <p><strong>المقدم:</strong> "اوف.. الله.. بسم الله ما شاء الله. وقف عندك! أقوى خصم ممكن تشوفه بتاريخ حياتك. تعرف ليه؟.. على الأصلي، فرش جي فاني بوتيك. القصات المميزة اللي بتركب على جميع أنواع السيارات، والأحلى من هيك.. في منها جميع الألوان... فرش أصلي، تركي، كفالة، خامات... والخصم 30% لمدة خميس، جمعة، سبت. زور معرض دبل إم (Double M)... ونستناكم بالفرعين.. سلام."</p>
+                        </div>
+                        <div class="content-block">
+                            <h3>الملخص الاستراتيجي 📊</h3>
+                            <ul>
+                                <li><strong>الترويج الحماسي (Flash Sale):</strong> لقطات مقربة تبرز جودة الخامات لتوليد شعور بالرغبة.</li>
+                                <li><strong>الوضوح والشمول:</strong> ذكر المزايا التنافسية بوضوح لتقليل مخاوف العميل.</li>
+                                <li><strong>عامل الندرة وضغط الوقت:</strong> تخفيض 30% بنافذة زمنية ضيقة (خميس، جمعة، سبت).</li>
+                                <li><strong>التسويق الاجتماعي:</strong> أسلوب الحوار العفوي يكسر الجمود ويزيد الثقة.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Post 4 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
+            <!-- المنشور 3 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-caption">🔥 عروض الخميس - الجمعة - السبت 🔥 خصم 25% على تشكيلة واسعة...</span>
+                    <span class="card-date">23 يوليو 2026</span>
                 </div>
-                <div class="post-details">عمرك شفت ميا بتغار من تسلا 🤔 في الدبل ام كل شي متوقع 🤷🏻‍♂️</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/753513923_18360044749215801_8369310633131850469_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=102&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=XxjfIuIS0hEQ7kNvwHRpBay&_nc_oc=AdotSayHB5EkuQMDxs7me1RLOt4Nw3mSFZGM-Qn9Zto0otS8oyAwHtY7Y-nwHsalDH-XxwvWM5vEqJWkk5LJezqe&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=Q_DLKZ3gEtXIDcqRuqv3dQ&_nc_ss=7b289&oh=00_AQBmjSYt2b5FryEMQyuHN96T_eA-5XwEoXM-seJ8j665gg&oe=6A670E96" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/903992302749790/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
+                <div class="card-body">
+                    <div class="media-section">
+                        <img src="https://scontent-fra3-2.xx.fbcdn.net/v/t51.82787-15/755870242_18360213841215801_7786350546490940394_n.jpg?stp=dst-jpg_s1080x2048_tt6&_nc_cat=111&ccb=1-7&_nc_sid=ebae6b&_nc_ohc=2gAkRO-Y6ZgQ7kNvwFHQlrv&_nc_oc=Adqv4Yc4UCXutwJKKtzhRkIouDYrJ0j2BLkGEpLmfTpX95sVQdn_0PZYA72ib3bKxVg&_nc_zt=23&_nc_ht=scontent-fra3-2.xx&_nc_gid=cWEa7v73eP69eqJCpdIO-g&_nc_ss=7b289&oh=00_AQDg-pr4KGxZk3dzJ8fQ4j11C1XSc_E0yTekgGg5b_bjww&oe=6A690075" alt="Post Image">
+                        <a href="https://m.facebook.com/doublemamman/posts/pfbid0RYNrteXZJaxT7uDE7gMCAyR5BwDMGkPJUgdZHDhUXZTnFmkeXtXUBtrtzKXctLq7l" target="_blank" class="watch-link">مشاهدة الفيديو الأصلي</a>
                     </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"أورجيك التيسلا.. تفتح معي هيك.. بتقلب معك كاميرا خلفية.. تيسلا ولا مش تيسلا؟ بتركب على أي سيارة، اكتب لي موديل سيارتك."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>استراتيجية المقارنة:</strong> خلق فضول بمقارنة السيارات العادية بالتيسلا.</li>
-                            <li><strong>تقديم المنتج كحل عصري:</strong> إمكانية ترقية أي سيارة بشاشة 360 درجة.</li>
-                            <li><strong>التركيز على تجربة المستخدم:</strong> عرض التجربة العملية بدل المواصفات المملة.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Post 5 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
-                </div>
-                <div class="post-details">شادر الكريفا ...الي راح يحمي سيارتك من جميع العوامل الجوية 🚗✨️</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-otp1-1.xx.fbcdn.net/v/t51.71878-10/753646822_2037838600155771_5755478549004426530_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=109&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=yeLuIk0s9NEQ7kNvwEvSjz3&_nc_oc=AdqRR24fTrtSO8FV3gjwiDjswBWfofBVL24Z_eJq5p1qYbtvTR4Z8uenfrzvwttxmEo&_nc_zt=23&_nc_ht=scontent-otp1-1.xx&_nc_gid=_5ZAW5sDoWheqmrgJTTzGQ&_nc_ss=7b289&oh=00_AQB-aaSP5kB9UabzAjrzX1Tkusv6aHt0Xx3TG4LARkn70g&oe=6A6715BB" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/1772064054226875/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
-                    </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"والحلو بهاد الشادر إنه واتربروف 100%... من تحت بيجي زم... من جوا مبطن... بيثبت على المراية... تحكيلي شو نوع سيارتك لأقولك إذا متوافر."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>معالجة نقاط الألم:</strong> التركيز على مشاكل الأغطية التقليدية.</li>
-                            <li><strong>الإثبات البصري:</strong> اختبار سكب الماء لإثبات الجودة.</li>
-                            <li><strong>الميزات التنافسية:</strong> البطانة الداخلية، السحاب الجانبي، التثبيت المحكم.</li>
-                        </ul>
+                    <div class="content-section">
+                        <div class="content-block transcript">
+                            <h3>التفريغ الصوتي 🎙️</h3>
+                            <p>لا يوجد تفريغ صوتي (منشور صور/نصي ترويجي).</p>
+                        </div>
+                        <div class="content-block">
+                            <h3>الملخص الاستراتيجي 📊</h3>
+                            <p>إعلان نصي مباشر يركز على تذكير الجمهور بالعروض الأسبوعية (الخميس حتى السبت) وخصم 25% على تشكيلة واسعة، يعتمد على البساطة والوضوح في الطرح.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Post 6 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
+            <!-- المنشور 4 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-caption">نزلت عروض على افضل الشاشات بالسوق لحق حالك 🔥🔥🔥</span>
+                    <span class="card-date">23 يوليو 2026</span>
                 </div>
-                <div class="post-details">فقط ب ٥دنانير بدلا من ٢٠ دينار المنتج السفاح من الدبل ام 😎👌</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-cdg4-2.xx.fbcdn.net/v/t51.82787-10/753206239_18360084637215801_7644080510892646603_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=107&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=-096rjwVxIwQ7kNvwHKmbKX&_nc_oc=AdpU3DAOJQebIcV0kNNrkp4tShMfKF8GnC7Ohe6HQPNg6AWVj6lpHXa6jQjs-WfiKsc&_nc_zt=23&_nc_ht=scontent-cdg4-2.xx&_nc_gid=9ld8FroX4eXvTVsQAi_3MQ&_nc_ss=7b289&oh=00_AQAeymZA3cFf4WRRkzVch8qSs1WkPewNdxWwIRzPH08jJg&oe=6A67728E" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/2335241273883177/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
+                <div class="card-body">
+                    <div class="media-section">
+                        <img src="https://scontent-lhr11-1.xx.fbcdn.net/v/t51.71878-10/755952164_1408563451135640_6001360128234766441_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=100&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=48po_0YX7MQQ7kNvwE6Hfsu&_nc_oc=Adp40d2AYx1HUvFfuGZ9PUL9vXTXuq7r-gyT1Kr0fDnkfsX5kyY429jea3xUY1GowUw&_nc_zt=23&_nc_ht=scontent-lhr11-1.xx&_nc_gid=4gJ_U9GKdoy6lhuNesx-rw&_nc_ss=7b289&oh=00_AQAIvmSWaRyw5XI9DNSSCkXZ2oTrt_Id1FTJYktxCGZD4g&oe=6A6927FB" alt="Post Image">
+                        <a href="https://www.facebook.com/reel/1744163886910775/" target="_blank" class="watch-link">مشاهدة الفيديو الأصلي</a>
                     </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"أهلاً شباب... تطلع هاي الأجنحة على الأرض وتختفي... كان سعرهم 20 دينار... تعال خذ الطقم فقط بـ 5 دنانير... السعر غير شامل التركيب... الحق هذا العرض قبل نفاذ الكمية."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>عرض بصري مباشر:</strong> عرض النتيجة النهائية للمنتج فوراً.</li>
-                            <li><strong>تثبيت السعر:</strong> المقارنة بين 20 و 5 دنانير لجعل العرض لا يقاوم.</li>
-                            <li><strong>خلق الاستعجال:</strong> تقييد العرض بأيام معينة ونفاذ الكمية.</li>
-                            <li><strong>الشفافية:</strong> فصل تكلفة التركيب لبناء الثقة.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-             <!-- Post 7 -->
-             <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
-                </div>
-                <div class="post-details">كيف تحافظ على لمعة داخلية سيارتك ...🚗✨️ مع منتج ارمور اول ✨️</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-sea5-1.xx.fbcdn.net/v/t51.71878-10/755246664_2391848187890610_3738996084500284996_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=105&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=QSbx2GypibIQ7kNvwHXpBJL&_nc_oc=AdoHgpYUJYxlHW0kuCtRbYq7LPeXImw0SKeAUbC2AxIKe-TvA42r4-ClH9BEhQnHuV8&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&_nc_gid=nWZ_4r1M1UHu9vncrIckbw&_nc_ss=7b289&oh=00_AQC1KVVYUWbfmQVhkltNhmkR9XEwq-wnc0gPihcMOl_oqA&oe=6A679035" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/1349290903375645/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
-                    </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"بتحس داخلية سيارتك صارت باهتة؟ حلك بسيط مع Armor All. بيرجع اللمعة وكأن السيارة طالعة من الوكالة... متوفر بعدة روائح... اكتب لي شو استخدمت منتج من Armor All قبل هيك؟"</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>المشكلة والحل:</strong> تحديد بهتان الديكور الداخلي وتقديم الحل السريع.</li>
-                            <li><strong>التطبيق العملي:</strong> عرض مشهد الرش والمسح مباشرة.</li>
-                            <li><strong>دعم المبيعات:</strong> دعوة صريحة للزيارة وتحديد الفروع.</li>
-                        </ul>
+                    <div class="content-section">
+                        <div class="content-block transcript">
+                            <h3>التفريغ الصوتي 🎙️</h3>
+                            <p>"واحدة من أفضل الشاشات بالسوق، صار عليها خصم وراح... شاشة الدبل أم المعروفة، وقوتها الأسطورية... بتيجي بـ بورد ألمنيوم، ومراوح تبريد، ومعالج خارق من سناب دراجون... والخصم 25 بالمية، من الاثنين جيجا رام لحتى الـ 8 جيجا رام... بالفرعين، مقابل دوار الحويان أو مقابل حرية مول."</p>
+                        </div>
+                        <div class="content-block">
+                            <h3>الملخص الاستراتيجي 📊</h3>
+                            <ul>
+                                <li><strong>بناء السلطة والثقة:</strong> استعراض المواصفات التقنية (معالج سناب دراجون، بورد ألمنيوم).</li>
+                                <li><strong>خلق حالة من الاستعجال:</strong> العرض لـ 3 أيام فقط (خميس، جمعة، سبت).</li>
+                                <li><strong>القيمة التنافسية:</strong> خصم 25% محدد بوضوح.</li>
+                                <li><strong>تسهيل الوصول للجمهور:</strong> تحديد مواقع الفروع لتقليل احتكاك العميل.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-        </section>
-
-
-        <!-- المنافس الثاني: الربيع -->
-        <section class="competitor-section">
-            <div class="competitor-title">الربيع لكهرباء وزينة السيارات</div>
-
-            <!-- Post 1 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 21 يوليو 2026</span>
+            <!-- المنشور 5 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-caption">‏عرض على أقوى شاشة في العالم شاشة Double M...</span>
+                    <span class="card-date">23 يوليو 2026</span>
                 </div>
-                <div class="post-details">قنبلة ULTRA SONIC 🤯🔥</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/754189588_1318261913670827_5504537690577422586_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=101&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=ZElF6vFIQU4Q7kNvwFk7uQK&_nc_oc=AdotBcm4sJFTO8a2poP6SVxCT4XX3zmRecFWqR3J9mef6ccQqIGjMGd4h5h6oGplcJRlyCK539Jc6_1yckZMY3oB&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=BHQbPMeSZRd1v1HjOb4eZg&_nc_ss=7b289&oh=00_AQB_TkbHq_8XOQLUhPVhQxxG2CvTj0_BaErwnn5J3TOr1A&oe=6A668F29" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/2094980141454495/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
+                <div class="card-body">
+                    <div class="media-section">
+                        <img src="https://scontent-cdg6-1.xx.fbcdn.net/v/t51.82787-10/753418309_18360221368215801_2286678262577080712_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=103&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=ybW4DzAWuc4Q7kNvwGzREi6&_nc_oc=AdoOqg-VejGOzAPd6zmT2QJvHqLz16cYZpj-8NvexiCqMXTMlXLSERIsQfDD4S30fFI&_nc_zt=23&_nc_ht=scontent-cdg6-1.xx&_nc_gid=b1edJ6-k7AP4VWuNYbVoXg&_nc_ss=7b289&oh=00_AQCayvSRHA5QXF5tHZPVlXap_U-FRuz_1ibysdqjfvDt1w&oe=6A690467" alt="Post Image">
+                        <a href="https://www.facebook.com/reel/1746347330118248/" target="_blank" class="watch-link">مشاهدة الفيديو الأصلي</a>
                     </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"وين يجي وتصب الـ 4000... اسمع الصوت، مكفول سنة كاملة، وعمرك شفت حدا بيكفل صوتيات؟ ما بتلاقي هالحكي إلا عند الربيع... اسمع لي الصوت."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>البرهان الاجتماعي:</strong> استعراض قوة الصوت لتوليد رغبة فورية.</li>
-                            <li><strong>عامل الثقة:</strong> تقديم كفالة سنة كاملة لكسر حاجز الخوف.</li>
-                            <li><strong>الانتشار الجغرافي:</strong> ذكر عدة فروع لتعزيز المصداقية.</li>
-                        </ul>
+                    <div class="content-section">
+                        <div class="content-block transcript">
+                            <h3>التفريغ الصوتي 🎙️</h3>
+                            <p><strong>المتحدث 1:</strong> "شو هاي الشاشة؟"<br><strong>المتحدث 2:</strong> "شاشة دبل إم، بس الأيفون بيعلق.. هاي ما بتعلق 100%. معالج سناب دراجون، ومروحة تبريد... يوتيوب وخرائط بدون تعليق... عليها خصم 25% ولمدة تلات أيام فقط... بالفرعين خميس، جمعة، سبت.. تعال ركب يا زلمة يلا."</p>
+                        </div>
+                        <div class="content-block">
+                            <h3>الملخص الاستراتيجي 📊</h3>
+                            <ul>
+                                <li><strong>التسويق بالتجربة المباشرة:</strong> كسر حاجز التشكك عبر عرض حلول لمشاكل تقنية (تعليق الشاشات).</li>
+                                <li><strong>عرض القيمة:</strong> إثبات تشغيل عدة تطبيقات ثقيلة دون تعليق.</li>
+                                <li><strong>خلق الإلحاح:</strong> خصم 25% لفترة زمنية ضيقة لدفع العميل للشراء الفوري.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Post 2 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 21 يوليو 2026</span>
+            <!-- المنشور 6 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-caption">هاذ البكج بلزم كل سيارة ✨️🚗</span>
+                    <span class="card-date">23 يوليو 2026</span>
                 </div>
-                <div class="post-details">إذا ناوي تركب ليزر، فهذا هو الوقت. عرض ما بتكرر</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/754699979_1551535726755568_7384029453634493524_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=105&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=IDp8S3rF-ckQ7kNvwFRtgiH&_nc_oc=AdpR_XVHvjjE6HItsvz3W5vHhmxjN11Ph5Ig5SO249Yr2KuMze5_Zo1xkj9-KTRWLcb5up-9IOV98SJ1cQvpMcem&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=BHQbPMeSZRd1v1HjOb4eZg&_nc_ss=7b289&oh=00_AQBrF0Lzm7KmiN0qv5WhGnevh1FRmy9ztSghua24I0rlpw&oe=6A66800E" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/2609846286124945/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
+                <div class="card-body">
+                    <div class="media-section">
+                        <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/753513330_18360225493215801_7107299579776030933_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=jf_Pn9kFeVgQ7kNvwHaAYbO&_nc_oc=AdoNU7PkfkzXxsvFyIHr_EFiZFNvDnxY8VPR7ytVsUobRx8YwRSBaqQzshEpF-IVmVHykSNuGu_inJyM5a0G5vAl&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=aD7EtK0gVSiuRqRMpcGf2A&_nc_ss=7b289&oh=00_AQBFuTdBBlamy7eNb2oOBZwsOyfgCM9qxAQMBH3CWQ5GAQ&oe=6A692CB2" alt="Post Image">
+                        <a href="https://www.facebook.com/reel/1370651511680738/" target="_blank" class="watch-link">مشاهدة الفيديو الأصلي</a>
                     </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"ليش تشتريه بـ 40 دينار؟ الثلاثة هذول بأقل من 30 دينار! وكفالة الربيع الأصلية... فيش بفيش... اكتب نوع سيارتك بالتعليقات عشان أقولك إيش المتوفر، ولفترة محدودة."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>كسر حاجز السعر:</strong> استخدام السعر المرتفع سابقاً لتعزيز قيمة العرض الحالي.</li>
-                            <li><strong>التأكيد على المصداقية:</strong> الكفالة الأصلية لإزالة تخوف العميل من السعر المنخفض.</li>
-                            <li><strong>سهولة الاستخدام:</strong> مصطلح "فيش بفيش" لتبسيط التركيب.</li>
-                            <li><strong>خلق الاستعجال:</strong> "لفترة محدودة" لاتخاذ قرار الشراء.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Post 3 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
-                </div>
-                <div class="post-details">الآن بتقدر تجدد داخلية سيارتك بخامات ممتازة (جلد الماني) 🔥</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/754699999_2283040185855277_1626180373403940832_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=110&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=a3l10HrAkfQQ7kNvwHAGE8F&_nc_oc=Adp3-QDFQlpodxp7USirit01KRRqhgoytI1ghC3ETqXA-xAH0apakxNT3-cykYZEEtg6M9lhxYRqV62E7DEBCvuO&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=Qiduv_lOEUVPY-hs0GuF9w&_nc_ss=7b289&oh=00_AQBNjVRhD2AXNgGodXZYit5vdgQ1iBkPjxUcxX06NhoJ3Q&oe=6A66AD05" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/1385305703511441/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
-                    </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"سألتوني بالتعليقات وين النتيجة... تعال أوريك كيف. كراسي الفيتو معلم... هنا قبل وهنا بعد... ضفنا الدرزات الخارجية ونفخنا الكرسي... بأقوى سعر وتحدي."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>قبل وبعد:</strong> المقارنة البصرية المباشرة لتعزيز الثقة.</li>
-                            <li><strong>القيمة المضافة:</strong> التركيز على تفاصيل دقيقة (الدرزات، النفخ).</li>
-                            <li><strong>تفاعلية الجمهور:</strong> الإشارة لتعليقات المتابعين لاستمرارية الاهتمام.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- المنافس الثالث: غازي الزعبي -->
-        <section class="competitor-section">
-            <div class="competitor-title">غازي الزعبي لزينة و كهرباء السيارات</div>
-
-            <!-- Post 1 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
-                </div>
-                <div class="post-details">خلي سيارتك تخطف الأنظار في الشوارع! 🔥 الستكر المضيء لمخ البريك وصل!</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-sea5-1.xx.fbcdn.net/v/t51.82787-10/753471221_18096224669624786_7713762137720018881_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=110&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=UgZBUZNQwOgQ7kNvwHuiqkN&_nc_oc=AdrMGNpq-JlKXitTiQRKq3JD0ynZ31q8gep_dGxVf9dmGVh_SWZl6vG8ud4ExM7sM1Y&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&_nc_gid=x36Q6aAFkK32cD8VMKLrag&_nc_ss=7b289&oh=00_AQDHior4pBpP0Ydeidvm-YTJIPK1puPwNgZxQ46RW1Y4Mg&oe=6A67C249" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/3990366737767217/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
-                    </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"تم الحرق بنجاح.. بـ 10 دنانير شامل التركيب.. متواجد بالفرعين شارع الحرية وشارع الجامعة، العرض لمدة 3 أيام."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>خلق الاستعجال:</strong> "تم الحرق" و"العرض لمدة 3 أيام فقط".</li>
-                            <li><strong>القيمة مقابل السعر:</strong> 10 دنانير شامل التركيب لكسر حاجز التكاليف الإضافية.</li>
-                            <li><strong>تسهيل الوصول:</strong> ذكر وجود فرعين لتعزيز المصداقية.</li>
-                        </ul>
+                    <div class="content-section">
+                        <div class="content-block transcript">
+                            <h3>التفريغ الصوتي 🎙️</h3>
+                            <p>"بكدج كامل من (Go-Des) لسيارتك... أجدع شريط للشاشات والأشياء البلاستيكية، مايكروفايبر أحسن من تبعت أبل... سلك AUX، حمالة التلفون، سلك شاحن ثلاثي... تعليقات لرقبة الكرسي الخلفي... عظمة شحن عالية الأداء... متوفر بالفرعين من 8 لـ 12 يومياً، وتقدر تسأل عنه في التعليقات."</p>
+                        </div>
+                        <div class="content-block">
+                            <h3>الملخص الاستراتيجي 📊</h3>
+                            <ul>
+                                <li><strong>القيمة الشاملة (Value Proposition):</strong> تقديم باقة متكاملة (All-in-one) تغطي احتياجات السائق الأساسية.</li>
+                                <li><strong>بناء الثقة:</strong> مقارنة الجودة بعلامات تجارية عالمية ("أحسن من تبعت أبل").</li>
+                                <li><strong>استهداف نقاط الألم:</strong> حل مشاكل يومية مثل عجقة الأكياس وتعدد الأسلاك.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Post 2 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
+            <!-- المنشور 7 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-caption">الخصم القوي والحقيقي صار بالدبل ام😎👀</span>
+                    <span class="card-date">24 يوليو 2026</span>
                 </div>
-                <div class="post-details">العرض اللي الكل كان بستناه صار جاهز! 🔥 جبنالك "سستم" كامل بسعر ما بتصدق</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-sea1-1.xx.fbcdn.net/v/t51.71878-10/749459964_1347486946924285_8115644559289239689_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=106&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=x_AdGJhpEiQQ7kNvwFMNEVI&_nc_oc=AdrPafTnRgobiPmfbvO4-UvkEFLuVDdmzFjOuwHa1PFtqarX2z4WSi-2xVtUD5ARIuI&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&_nc_gid=x36Q6aAFkK32cD8VMKLrag&_nc_ss=7b289&oh=00_AQBRvvKCAFcS5hMPgX4DLOhXZg0w22tMpqXMxhbnfBbaLA&oe=6A67995F" alt="Post Image" class="post-img">
-                        <a href="https://www.facebook.com/reel/876206755183424/" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
+                <div class="card-body">
+                    <div class="media-section">
+                        <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/755696030_18360273136215801_7561100330020198659_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=106&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=RbOGBgDUqQUQ7kNvwGuLgbN&_nc_oc=AdpqETVljlFffCeQsh1Cyg41UKogm8tzDux231cPOW1kvrSHjZZFKB-pGRNgJ-KFuP6vR0A5CBkFZVAMtMXXF2-I&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=ZerPdtuEZ82OiugHnD3kKA&_nc_ss=7b289&oh=00_AQD6uPEMPBygQ7u3A5_QAbJrrf8Q2D2eFiKh7o-arkVCqA&oe=6A695316" alt="Post Image">
+                        <a href="https://www.facebook.com/reel/3805999402873865/" target="_blank" class="watch-link">مشاهدة الفيديو الأصلي</a>
                     </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"متخيل 150 دينار؟ شغل سيارتك تعال الآن.. صب، صناديق، إم بي فاير، سماعات، دستم كامل وشامل التركيب.. العرض لمدة ثلاث أيام.. يا بتلحق يا بتروح عليك."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>العرض المحدود:</strong> مبدأ الوقت المحدود لزيادة دافع الشراء الفوري.</li>
-                            <li><strong>الحل الكامل:</strong> تقديم سيستم متكامل بسعر منافس.</li>
-                            <li><strong>النداء المباشر:</strong> "يا بتلحق يا بتروح عليك" لزيادة نسبة التحويل.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- المنافس الرابع: 2X -->
-        <section class="competitor-section">
-            <div class="competitor-title">2x_for_car.accessories</div>
-
-            <!-- Post 1 -->
-            <div class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">📅 22 يوليو 2026</span>
-                </div>
-                <div class="post-details">ابو نايف وابو ثامر مجتمعين ابصر شو القصة !!</div>
-                <div class="post-content">
-                    <div>
-                        <img src="https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/752638890_18061586114754198_6437101650614631587_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gHGXYAsgbX8YDY7U3-bZUDQb3QPuXzer8Du_nSgQSCRwn3RNWwgXYz5oYYVGVE765_nBzgHywRdZqjBEHyWzfGK&_nc_ohc=6iF3qJRa3LEQ7kNvwG1HALK&_nc_gid=aRBdLKOTZrbXz6vkcPDCxA&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AQCTOo-kaTxgsM2tYg-55zk4GOIpZOzjzXgFelkrNmgi2g&oe=6A67C6AE&_nc_sid=8b3546" alt="Post Image" class="post-img">
-                        <a href="https://www.instagram.com/p/DbGRIwNuAjA" target="_blank" class="post-link">🔗 مشاهدة الفيديو</a>
-                    </div>
-                    <div class="analysis-box">
-                        <div class="analysis-title">📝 التفريغ النصي</div>
-                        <div class="transcript">"ما شاء الله، لمعة سيارتك نظيفة، وين بتغسلها؟ أنا ما بغسل في مغسلة، عندي هذه جبتها من 2X... بكج فيها كل شيء... اعطوني هدية.. أخذتهم بأقل من 27 دينار. عندهم فرع بالحرية وفرع بالقدس."</div>
-                        <div class="analysis-title">📊 التحليل الاستراتيجي</div>
-                        <ul class="strategy-list">
-                            <li><strong>التسويق بالمحتوى الترفيهي:</strong> مشهد تمثيلي عفوي (POV) يكسر توقعات المشاهد.</li>
-                            <li><strong>بناء الثقة عبر المحاكاة:</strong> اختيار شخصيات تبدو كأصدقاء لتعزيز المصداقية.</li>
-                            <li><strong>التركيز على القيمة:</strong> السعر المخفض، شمولية المجموعة، وسهولة الاستخدام.</li>
-                        </ul>
+                    <div class="content-section">
+                        <div class="content-block transcript">
+                            <h3>التفريغ الصوتي 🎙️</h3>
+                            <p>يبدأ بمشهد "خناقة" وهمي: "وين؟ بعدين معك أنت؟ يا زلمة هبلتني...". ثم ينتقل لعرض المنتجات: "الدبل والكريفة... أعلى أصناف، بعرفهم ومجربهم... 25% خصم، يعني اجي اعطيك طقم... خميس، جمعة، سبت، سلام".</p>
+                        </div>
+                        <div class="content-block">
+                            <h3>الملخص الاستراتيجي 📊</h3>
+                            <ul>
+                                <li><strong>خطاف الانتباه (The Hook):</strong> مشهد خناقة وهمي لإثارة الفضول وإيقاف المستخدم أثناء التصفح.</li>
+                                <li><strong>التحول نحو المنتج:</strong> الانتقال من جو التوتر لعرض المنتجات (مصابيح LED) بأسلوب حماسي.</li>
+                                <li><strong>التسويق الدرامي:</strong> التناقض البصري والسمعي لجذب الشباب المهتمين بتعديل السيارات.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-    </div>
+            <!-- المنشور 8 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-caption">‏خصم على فرش (Gb)لنعاية يوم السبت فرش تركي فرش مكفول...</span>
+                    <span class="card-date">24 يوليو 2026</span>
+                </div>
+                <div class="card-body">
+                    <div class="media-section">
+                        <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/753205944_18360243835215801_6270205982114854944_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=101&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=YVfzekUK75gQ7kNvwGTzLQE&_nc_oc=Adqk2f44qdNl3LMHB4L4MKFQFYSVZyEfw5d0Zk3BVu4PbgFahlOFJ1xqOO6zvLL27XDyUZzETd1eisbLJ4xkxNLk&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=LaZzH73DKSsbbYSYLEDN5g&_nc_ss=7b289&oh=00_AQAes7UEDZr33XeoI5g-Tku2c4UmggKsNEI7jAmtcoym2g&oe=6A69499F" alt="Post Image">
+                        <a href="https://www.facebook.com/reel/1035070422765813/" target="_blank" class="watch-link">مشاهدة الفيديو الأصلي</a>
+                    </div>
+                    <div class="content-section">
+                        <div class="content-block transcript">
+                            <h3>التفريغ الصوتي 🎙️</h3>
+                            <p><strong>النص المكتوب:</strong> "لما عرفت إنو في خصم 30% على فرش أل (GB)".<br><strong>الصوت:</strong> موسيقى إيقاعية (ريمكس Samba) تتماشى مع حركة الكاميرا وزوايا عرض الفرش.</p>
+                        </div>
+                        <div class="content-block">
+                            <h3>الملخص الاستراتيجي 📊</h3>
+                            <ul>
+                                <li><strong>الجاذبية البصرية:</strong> التركيز على جودة المنتج وتصميمه الأنيق.</li>
+                                <li><strong>استراتيجية العرض:</strong> "خصم 30%" كخطاف أساسي لجذب العميل.</li>
+                                <li><strong>العناصر الترفيهية:</strong> ملصق القطة الراقصة لكسر الجمود وزيادة الانتشار.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <footer class="footer">
-        <p>تم إعداد هذا التقرير بناءً على تحليل المنشورات المستخرجة بتاريخ يوليو 2026.</p>
-    </footer>
-
-</body>
-</html>
+            <!-- المنشور 9 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-caption">غطاء تابلو كنتاره و قماش متوفر في معارض الدبل ام...</span>
+                    <span class="card-date">24 يوليو 2026</span>
+                </div>
+                <div class="card-body">
+                    <div class="media-section">
+                        <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/755743304_18360285430215801_4750426222300759630_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=107&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=3hiYED1GseYQ7kNvwHqBjdg&_nc_oc=AdoALKkfkx3o_l7LjEBQHib_WIpqHtgfOYuTXck3LQn8Dgxb2XtBKcHOckF8lQt44oi50bEYpAa30Xf40nTEagW&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=LaZzH73DKSsbbYSYLEDN5g&_nc_ss=7b289&oh=00_AQDyaf_H-end3rGxGdigwLyefNe7Jn70LgcFpbbIinzRLw&oe=6A694ABE" alt="Post Image">
+                        <a href="https://www.facebook.com/reel/2045312383038408/" target="_blank" class="watch-link">مشاهدة الفيديو الأصلي</a>
+                    </div>
+                    <div class="content-section">
+                        <div class="content-block transcript">
+                            <h3>التفريغ الصوتي 🎙️</h3>
+                            <p>"بسم الله الرحمن الرحيم، اليوم جايبينلكم أغطية التابلو، بتيجي للأقمشة أو الكنتارا... مبطنين سيليكون مستحيل يتحركوا... متوفر لمعظم أنواع السيارات، كل اللي
