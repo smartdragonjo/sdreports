@@ -3,358 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أفكار الابتكار التشغيلي والتسويقي - التنين الذكي</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>تقرير تحليل المنافسين الشامل - إكسسوارات السيارات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #00e5ff;
-            --accent-glow: rgba(0, 229, 255, 0.2);
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --success-color: #22c55e;
-            --border-color: #334155;
+            --primary: #1e3a5f;
+            --secondary: #f4b41a;
+            --accent: #e63946;
+            --bg: #f0f4f8;
+            --card-bg: #ffffff;
+            --text: #333;
+            --light-text: #666;
+            --radius: 12px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --hover-shadow: 0 10px 15px rgba(0,0,0,0.1);
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, var(--accent-color), #3b82f6);
-            background-clip: text; /* السطر الإضافي الذي يحل تحذير VS Code */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            max-width: 800px;
-            margin: 30px auto;
-            background: var(--card-bg);
-            border-radius: 50px;
-            height: 25px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--success-color), #4ade80);
-            transition: width 0.5s ease;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding-right: 15px;
-            font-weight: bold;
-            color: #052e16;
-            font-size: 0.9rem;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid var(--border-color);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-color), #3b82f6);
-            opacity: 0.8;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border-color: var(--accent-color);
-        }
-
-        /* Checkbox Style */
-        .checkbox-wrapper {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
-
-        .custom-checkbox {
-            display: block;
-            width: 28px;
-            height: 28px;
-            border: 2px solid var(--text-muted);
-            border-radius: 8px;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-            background-color: transparent;
-        }
-
-        .custom-checkbox:hover {
-            border-color: var(--success-color);
-        }
-
-        input[type="checkbox"] {
-            display: none;
-        }
-
-        input[type="checkbox"]:checked + .custom-checkbox {
-            background-color: var(--success-color);
-            border-color: var(--success-color);
-        }
-
-        input[type="checkbox"]:checked + .custom-checkbox::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #052e16;
-            font-size: 20px;
-            font-weight: 900;
-            animation: pop 0.3s ease;
-        }
-
-        @keyframes pop {
-            0% { transform: translate(-50%, -50%) scale(0); }
-            80% { transform: translate(-50%, -50%) scale(1.2); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .card-content {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .icon-box {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        .icon-box svg {
-            width: 35px;
-            height: 35px;
-            stroke: var(--accent-color);
-            fill: none;
-            stroke-width: 1.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .card h2 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-main);
-            transition: all 0.3s ease;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Implemented State */
-        .card.implemented {
-            opacity: 0.6;
-            background: #16202e;
-        }
-
-        .card.implemented::before {
-            background: var(--success-color);
-        }
-
-        .card.implemented h2 {
-            text-decoration: line-through;
-            color: var(--text-muted);
-        }
-
-        .card.implemented .icon-box svg {
-            stroke: var(--success-color);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.8rem; }
-            .grid-container { grid-template-columns: 1fr; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--primary), #15293f); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        header p { font-size: 1.1em; opacity: 0.9; }
+        .controls { max-width: 1200px; margin: 0 auto 30px; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; }
+        .search-box { flex: 1 1 300px; max-width: 400px; padding: 12px 20px; border: 2px solid var(--primary); border-radius: 30px; font-family: 'Cairo'; font-size: 1em; }
+        .tabs-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .tab-btn { background: white; color: var(--primary); border: 2px solid var(--primary); padding: 8px 20px; border-radius: 30px; font-family: 'Cairo'; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .tab-btn:hover, .tab-btn.active { background: var(--primary); color: white; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 50px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .competitor-header { display: flex; justify-content: space-between; align-items: center; background: var(--primary); color: white; padding: 15px 25px; border-radius: var(--radius); margin-bottom: 25px; }
+        .competitor-header h2 { font-size: 1.5em; }
+        .badge { background: var(--secondary); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.9em; }
+        .card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #e1e8ed; }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--hover-shadow); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: #f8fafc; border-bottom: 1px solid #e1e8ed; }
+        .caption { font-weight: 700; color: var(--primary); font-size: 1.1em; }
+        .date { color: var(--light-text); font-weight: 600; font-size: 0.9em; }
+        .card-body { display: flex; flex-wrap: wrap; padding: 20px; }
+        .media { flex: 1 1 300px; margin-left: 20px; margin-bottom: 20px; }
+        .media img { width: 100%; border-radius: 8px; height: auto; margin-bottom: 15px; border: 1px solid #eee; }
+        .watch-btn { display: block; background: var(--accent); color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: 700; text-align: center; transition: background 0.3s; }
+        .watch-btn:hover { background: #c1121f; }
+        .content { flex: 2 1 600px; }
+        .block { margin-bottom: 20px; background: #fdfdfd; border-right: 4px solid var(--secondary); padding: 15px; border-radius: 0 8px 8px 0; }
+        .block h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.1em; }
+        .block p, .block li { color: #444; font-size: 0.95em; margin-bottom: 8px; }
+        .block ul { padding-right: 20px; list-style-type: disc; }
+        .transcript { background: #eef2f7; border-right-color: var(--primary); font-style: italic; }
+        .no-results { text-align: center; padding: 40px; color: var(--light-text); font-size: 1.2em; display: none; }
+        @media (max-width: 768px) {
+            .card-body { flex-direction: column; }
+            .media { margin-left: 0; width: 100%; }
+            header h1 { font-size: 1.8em; }
         }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>خطة الابتكار في التشغيل والمبيعات</h1>
-        <p>أفكار ذكاء اصطناعي وتسويق مبتكرة - اضغط على المربع لتحديد الفكرة كـ "تم التنفيذ"</p>
+        <h1>تقرير تحليل منافسي قطاع إكسسوارات السيارات</h1>
+        <p>تحليل استراتيجي شامل لمحتوى الفيديو والتسويق الرقمي لجميع المنافسين</p>
     </header>
 
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar">0% مكتمل</div>
+    <div class="controls">
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث في التقرير (اسم منتج، استراتيجية، منافس...)" oninput="searchReport()">
+        <div class="tabs-container" id="tabsContainer">
+            <button class="tab-btn active" onclick="openTab(event, 'all')">الكل</button>
+        </div>
     </div>
 
-    <div class="grid-container" id="ideasGrid">
-        <!-- Cards will be injected here by JS -->
+    <div class="container">
+        <div id="reportContainer"></div>
+        <div class="no-results" id="noResults">لا توجد نتائج مطابقة لبحثك.</div>
     </div>
-
-    <footer>
-        تصميم تفاعلي لتبسيط الأفكار التشغيلية والتسويقية &copy; 2024
-    </footer>
 
     <script>
-        // Data Array for Ideas
-        const ideas = [
-            {
-                title: "نظام الموظفين الرقميين (AI Agents)",
-                desc: "وكلاء ذكاء اصطناعي يردون على العملاء ويجهزون الاقتراحات، في انتظار اعتمادك بضغطة زر (Human-in-the-Loop).",
-                icon: `<path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2M20 14h2M15 13v2M9 13v2" />`
-            },
-            {
-                title: "تطوير أدوات داخلية (Verdent AI)",
-                desc: "بناء منصات برمجية داخلية تساعد في تنظيم العمل وتخطيط المشاريع كشريك برمجي يحلل ويكتب الأكواد.",
-                icon: `<polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />`
-            },
-            {
-                title: "صياغة حملات CO-STAR",
-                desc: "استخدام إطار عمل CO-STAR لكتابة نصوص إعلانية تضمن أقصى درجات التأثير والاستجابة من مالكي السيارات.",
-                icon: `<path d="M3 11l18-5v12L3 14v-3z" /><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />`
-            },
-            {
-                title: "التسعير الديناميكي الاستباقي",
-                desc: "تحليل أسعار المنافسين آلياً واقتراح تعديل فوري لأسعارك للحفاظ على هامش الربح والبقاء في الصدارة.",
-                icon: `<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" />`
-            },
-            {
-                title: "خريطة الطلب الحرارية (CRM)",
-                desc: "استغلال بيانات العملاء لإطلاق حملات صيانة استباقية مخصصة حسب الموقع والموسم (مثل الإضاءة قبل الشتاء).",
-                icon: `<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />`
-            },
-            {
-                title: "مصنع المحتوى التلقائي",
-                desc: "تحويل نصوص فيديوهات المنافسين إلى سيناريوهات وأفكار قصيرة (Reels/TikTok) متفوقة ومصاغة باللهجة المحلية.",
-                icon: `<polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" />`
-            },
-            {
-                title: "برنامج صناعة المحتوى بالمكافآت",
-                desc: "فتح باب المشاركة لصناع المحتوى لعمل مراجعات للمنتجات مقابل حوافز، نقاط ولاء، أو خصومات.",
-                icon: `<circle cx="12" cy="8" r="7" /><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />`
-            },
-            {
-                title: "محتوى الرسوم البسيطة (Stick Figure)",
-                desc: "إنتاج فيديوهات قصيرة برسومات بسيطة توضح كيف تحل إكسسواراتنا مشاكل السائقين اليومية لتحقيق انتشار سريع.",
-                icon: `<circle cx="12" cy="5" r="3" /><line x1="12" y1="8" x2="12" y2="16" /><line x1="8" y1="12" x2="16" y2="12" /><line x1="12" y1="16" x2="8" y2="22" /><line x1="12" y1="16" x2="16" y2="22" />`
-            },
-            {
-                title: "استطلاعات الرأي المثيرة للجدل",
-                desc: "توليد فيديوهات جدلية ساخنة (LED ضد Xenon) لتصدر الترندات ورفع نسبة المشاركات والتعليقات.",
-                icon: `<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><line x1="9" y1="9" x2="9" y2="13" /><line x1="12" y1="9" x2="12" y2="15" /><line x1="15" y1="9" x2="15" y2="13" />`
-            },
-            {
-                title: "لوحة عروض أسعار تفاعلية",
-                desc: "أداة لموظف المبيعات تولد صفحة عرض سعر ديناميكية (صور، فيديوهات، أسعار) بضغطة زر بمجرد إدخال نوع السيارة.",
-                icon: `<rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /><path d="M12 7l2 2-2 2-2-2 2-2" />`
-            }
+        const reportData = [
+            { c: "Double M For Cars Accessories", d: "23 يوليو 2026", t: "تحقق الي طلبتوه ✨️🥹", v: "https://www.facebook.com/reel/1566889311610309/", i: "https://scontent-lga3-2.xx.fbcdn.net/v/t51.71878-10/753306335_2315468149267026_7679518317772516281_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=101&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=U2bOsNPKWVMQ7kNvwGmgiWy&_nc_oc=AdrV8SvQwAPxgbtVZoT0ydEAKyHtOpkJly3afs45Xv4yhl7LszHhIiulSZDlRqTjCbI&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=RHGalPl6MoZUGOd8Vp0O_g&_nc_ss=7b289&oh=00_AQD9RNOFooQf9KBC0RrN5lb6D5qviYLzM9yaFsPL24T0uA&oe=6A6869E7", tr: "وأخيراً صار اللي طلبتوه.. نزل سعر أفخم فرش بالعالم، لكن فقط لثلاث أيام، فرش جي بي.. صناعة تركية بخامات قوية وقصات حديثة وألوان رهيبة، بركب على كل السيارات وبغير الداخلية بالكامل. صار عليه خصم قوي من الخميس ليوم السبت، والخصم 30 بالمية على فرشات جي بي. وهذا العرض راح يكون بالفرعين مقابل دوار الاحويان ومقابل حرية، فـ شو بتستنى؟", s: "<ul><li><strong>التسويق بالإلحاح (Urgency Marketing):</strong> استخدام خصم 30% لمدة 3 أيام فقط لخلق دافع فوري (FOMO).</li><li><strong>تلبية رغبة الجمهور:</strong> البدء بعبارة 'وأخيراً صار اللي طلبتوه' لتعزيز العلاقة مع المتابعين.</li><li><strong>القيمة مقابل السعر:</strong> التركيز على المزايا التنافسية (صناعة تركية، متانة، قصات حديثة).</li><li><strong>الدعوة لاتخاذ إجراء (CTA):</strong> اختتام الفيديو بعبارة 'شو بتستنى؟' لتحفيز التحرك الفوري.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "23 يوليو 2026", t: "‏أفضل وأقوى فرش ممكن يركب على سيارتك...", v: "https://www.facebook.com/reel/1749417656513710/", i: "https://scontent-fra5-2.xx.fbcdn.net/v/t51.82787-10/754143288_18360213583215801_2416234978730475798_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=109&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=YQ64aj18wRgQ7kNvwFJFJvP&_nc_oc=Adr-Tcg_oV9D4HQM8yQ95UkywHGUKeII1Ns_nKMe_2FAKyQFXGhhu5OvTNutqQilKnk&_nc_zt=23&_nc_ht=scontent-fra5-2.xx&_nc_gid=cWEa7v73eP69eqJCpdIO-g&_nc_ss=7b289&oh=00_AQAla3OYqtQZzVxNeYqum43hOawt3rdYWRADrrECkEbkWQ&oe=6A690184", tr: "اوف.. الله.. بسم الله ما شاء الله. وقف عندك! أقوى خصم ممكن تشوفه بتاريخ حياتك. تعرف ليه؟.. على الأصلي، فرش جي فاني بوتيك. القصات المميزة اللي بتركب على جميع أنواع السيارات... بدك كمان أزرق، بدك أحمر... فرش أصلي، تركي، كفالة... والخصم 30% لمدة خميس، جمعة، سبت. زور معرض دبل إم... ونستناكم بالفرعين.. سلام.", s: "<ul><li><strong>الترويج الحماسي (Flash Sale):</strong> لقطات مقربة تبرز جودة الخامات لتوليد شعور بالرغبة.</li><li><strong>الوضوح والشمول:</strong> ذكر المزايا التنافسية بوضوح لتقليل مخاوف العميل.</li><li><strong>عامل الندرة وضغط الوقت:</strong> تخفيض 30% بنافذة زمنية ضيقة (خميس، جمعة، سبت).</li><li><strong>التسويق الاجتماعي:</strong> أسلوب الحوار العفوي يكسر الجمود ويزيد الثقة.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "23 يوليو 2026", t: "🔥 عروض الخميس - الجمعة - السبت 🔥 خصم 25%...", v: "https://m.facebook.com/doublemamman/posts/pfbid0RYNrteXZJaxT7uDE7gMCAyR5BwDMGkPJUgdZHDhUXZTnFmkeXtXUBtrtzKXctLq7l", i: "https://scontent-fra3-2.xx.fbcdn.net/v/t51.82787-15/755870242_18360213841215801_7786350546490940394_n.jpg?stp=dst-jpg_s1080x2048_tt6&_nc_cat=111&ccb=1-7&_nc_sid=ebae6b&_nc_ohc=2gAkRO-Y6ZgQ7kNvwFHQlrv&_nc_oc=Adqv4Yc4UCXutwJKKtzhRkIouDYrJ0j2BLkGEpLmfTpX95sVQdn_0PZYA72ib3bKxVg&_nc_zt=23&_nc_ht=scontent-fra3-2.xx&_nc_gid=cWEa7v73eP69eqJCpdIO-g&_nc_ss=7b289&oh=00_AQDg-pr4KGxZk3dzJ8fQ4j11C1XSc_E0yTekgGg5b_bjww&oe=6A690075", tr: "لا يوجد تفريغ صوتي (منشور صورة).", s: "إعلان نصي مباشر يركز على تذكير الجمهور بالعروض الأسبوعية وخصم 25% على تشكيلة واسعة، يعتمد على البساطة والوضوح." },
+            { c: "Double M For Cars Accessories", d: "23 يوليو 2026", t: "نزلت عروض على افضل الشاشات بالسوق لحق حالك 🔥🔥🔥", v: "https://www.facebook.com/reel/1744163886910775/", i: "https://scontent-lhr11-1.xx.fbcdn.net/v/t51.71878-10/755952164_1408563451135640_6001360128234766441_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=100&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=48po_0YX7MQQ7kNvwE6Hfsu&_nc_oc=Adp40d2AYx1HUvFfuGZ9PUL9vXTXuq7r-gyT1Kr0fDnkfsX5kyY429jea3xUY1GowUw&_nc_zt=23&_nc_ht=scontent-lhr11-1.xx&_nc_gid=4gJ_U9GKdoy6lhuNesx-rw&_nc_ss=7b289&oh=00_AQAIvmSWaRyw5XI9DNSSCkXZ2oTrt_Id1FTJYktxCGZD4g&oe=6A6927FB", tr: "واحدة من أفضل الشاشات بالسوق، صار عليها خصم... شاشة الدبل أم المعروفة، وقوتها الأسطورية... بتيجي بـ بورد ألمنيوم، ومراوح تبريد، ومعالج خارق من سناب دراجون... والخصم 25 بالمية، من الاثنين جيجا رام لحتى الـ 8 جيجا رام... بالفرعين، مقابل دوار الحويان أو مقابل حرية مول.", s: "<ul><li><strong>بناء السلطة والثقة:</strong> استعراض المواصفات التقنية (معالج سناب دراجون، بورد ألمنيوم).</li><li><strong>خلق حالة من الاستعجال:</strong> العرض لـ 3 أيام فقط (خميس، جمعة، سبت).</li><li><strong>القيمة التنافسية:</strong> خصم 25% محدد بوضوح.</li><li><strong>تسهيل الوصول للجمهور:</strong> تحديد مواقع الفروع لتقليل احتكاك العميل.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "23 يوليو 2026", t: "‏عرض على أقوى شاشة في العالم شاشة Double M...", v: "https://www.facebook.com/reel/1746347330118248/", i: "https://scontent-cdg6-1.xx.fbcdn.net/v/t51.82787-10/753418309_18360221368215801_2286678262577080712_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=103&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=ybW4DzAWuc4Q7kNvwGzREi6&_nc_oc=AdoOqg-VejGOzAPd6zmT2QJvHqLz16cYZpj-8NvexiCqMXTMlXLSERIsQfDD4S30fFI&_nc_zt=23&_nc_ht=scontent-cdg6-1.xx&_nc_gid=b1edJ6-k7AP4VWuNYbVoXg&_nc_ss=7b289&oh=00_AQCayvSRHA5QXF5tHZPVlXap_U-FRuz_1ibysdqjfvDt1w&oe=6A690467", tr: "المتحدث 1: شو هاي الشاشة؟ / المتحدث 2: شاشة دبل إم، بس الأيفون بيعلق.. هاي ما بتعلق 100%. معالج سناب دراجون، ومروحة تبريد... يوتيوب وخرائط بدون تعليق... عليها خصم 25% ولمدة تلات أيام فقط... بالفرعين خميس، جمعة، سبت.. تعال ركب يا زلمة يلا.", s: "<ul><li><strong>التسويق بالتجربة المباشرة:</strong> كسر حاجز التشكك عبر عرض حلول لمشاكل تقنية (تعليق الشاشات).</li><li><strong>عرض القيمة:</strong> إثبات تشغيل عدة تطبيقات ثقيلة دون تعليق.</li><li><strong>خلق الإلحاح:</strong> خصم 25% لفترة زمنية ضيقة لدفع العميل للشراء الفوري.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "23 يوليو 2026", t: "هاذ البكج بلزم كل سيارة ✨️🚗", v: "https://www.facebook.com/reel/1370651511680738/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/753513330_18360225493215801_7107299579776030933_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=jf_Pn9kFeVgQ7kNvwHaAYbO&_nc_oc=AdoNU7PkfkzXxsvFyIHr_EFiZFNvDnxY8VPR7ytVsUobRx8YwRSBaqQzshEpF-IVmVHykSNuGu_inJyM5a0G5vAl&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=aD7EtK0gVSiuRqRMpcGf2A&_nc_ss=7b289&oh=00_AQBFuTdBBlamy7eNb2oOBZwsOyfgCM9qxAQMBH3CWQ5GAQ&oe=6A692CB2", tr: "بكدج كامل من (Go-Des) لسيارتك... أجدع شريط للشاشات والأشياء البلاستيكية، مايكروفايبر أحسن من تبعت أبل... سلك AUX، حمالة التلفون، سلك شاحن ثلاثي... تعليقات لرقبة الكرسي الخلفي... عظمة شحن عالية الأداء... متوفر بالفرعين من 8 لـ 12 يومياً، وتقدر تسأل عنه في التعليقات.", s: "<ul><li><strong>القيمة الشاملة:</strong> تقديم باقة متكاملة تغطي احتياجات السائق الأساسية.</li><li><strong>بناء الثقة:</strong> مقارنة الجودة بعلامات تجارية عالمية ('أحسن من تبعت أبل').</li><li><strong>استهداف نقاط الألم:</strong> حل مشاكل يومية مثل عجقة الأكياس وتعدد الأسلاك.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "الخصم القوي والحقيقي صار بالدبل ام😎👀", v: "https://www.facebook.com/reel/3805999402873865/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/755696030_18360273136215801_7561100330020198659_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=106&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=RbOGBgDUqQUQ7kNvwGuLgbN&_nc_oc=AdpqETVljlFffCeQsh1Cyg41UKogm8tzDux231cPOW1kvrSHjZZFKB-pGRNgJ-KFuP6vR0A5CBkFZVAMtMXXF2-I&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=ZerPdtuEZ82OiugHnD3kKA&_nc_ss=7b289&oh=00_AQD6uPEMPBygQ7u3A5_QAbJrrf8Q2D2eFiKh7o-arkVCqA&oe=6A695316", tr: "يبدأ بمشهد 'خناقة' وهمي: وين؟ بعدين معك أنت؟ يا زلمة هبلتني... ثم ينتقل لعرض المنتجات: الدبل والكريفة... أعلى أصناف، بعرفهم ومجربهم... 25% خصم... خميس، جمعة، سبت، سلام.", s: "<ul><li><strong>خطاف الانتباه (The Hook):</strong> مشهد خناقة وهمي لإثارة الفضول وإيقاف المستخدم أثناء التصفح.</li><li><strong>التحول نحو المنتج:</strong> الانتقال من جو التوتر لعرض المنتجات بأسلوب حماسي.</li><li><strong>التسويق الدرامي:</strong> التناقض البصري والسمعي لجذب الشباب المهتمين بتعديل السيارات.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "استغل المساحة بالشكل الصحيح👌🏻💯💯", v: "https://www.facebook.com/reel/1013679968167189/", i: "https://scontent-lhr11-1.xx.fbcdn.net/v/t15.5256-10/756342036_1090970696949636_1188759570477992270_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=110&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=cRibKPoSszgQ7kNvwHSXogq&_nc_oc=AdqLrBoNxXsLvbGyCYR3v08fM4cOZk6DyxinJTzT-M0mPUmb4Q2-twJ6WSNqkMkytiQ&_nc_zt=23&_nc_ht=scontent-lhr11-1.xx&_nc_gid=TtUJHaQxY1nyV4t1tpzlbA&_nc_ss=7b289&oh=00_AQAPgqRJR_PYP7Sreg4iSFBD-JjQcRCFKD2xLwuBu0VV4w&oe=6A69335E", tr: "ما في معك مجال تحط أغراض الرحلة؟ تعال أنا بحكيلك.. بتجيب كل أغراضك الشخصية أو أغراضك من الشامبو والمنفاخ والجاك وبتحطه في هذا الصندوق... فيه فواصل... خفيف بتحمله وبتوديه معك... استغل مساحة صندوق سيارتك بالشكل الصحيح.", s: "<ul><li><strong>تحديد المشكلة (Pain Point):</strong> معاناة ضيق مساحة صندوق السيارة وصعوبة التنظيم.</li><li><strong>عرض الحل (Solution):</strong> تقديم المنتج كحل سحري يجمع بين السعة التخزينية والترتيب.</li><li><strong>إبراز الميزات التنافسية:</strong> المرونة (فواصل قابلة للتعديل)، مساحات إضافية، وخفة الوزن.</li><li><strong>تحفيز الفعل (CTA):</strong> دعوة قوية ومباشرة (استغل مساحة صندوق سيارتك).</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "‏خصم على فرش (Gb)لنعاية يوم السبت فرش تركي...", v: "https://www.facebook.com/reel/1035070422765813/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/753205944_18360243835215801_6270205982114854944_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=101&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=YVfzekUK75gQ7kNvwGTzLQE&_nc_oc=Adqk2f44qdNl3LMHB4L4MKFQFYSVZyEfw5d0Zk3BVu4PbgFahlOFJ1xqOO6zvLL27XDyUZzETd1eisbLJ4xkxNLk&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=LaZzH73DKSsbbYSYLEDN5g&_nc_ss=7b289&oh=00_AQAes7UEDZr33XeoI5g-Tku2c4UmggKsNEI7jAmtcoym2g&oe=6A69499F", tr: "النص المكتوب: لما عرفت إنو في خصم 30% على فرش أل (GB). الصوت: موسيقى إيقاعية (ريمكس Samba) تتماشى مع حركة الكاميرا وزوايا عرض الفرش.", s: "<ul><li><strong>الجاذبية البصرية:</strong> التركيز على جودة المنتج وتصميمه الأنيق.</li><li><strong>استراتيجية العرض:</strong> 'خصم 30%' كخطاف أساسي لجذب العميل.</li><li><strong>العناصر الترفيهية:</strong> ملصق القطة الراقصة لكسر الجمود وزيادة الانتشار.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "متوفر لجميع موديلات السيارات 🚗 موديلات وألوان ونقشات...", v: "https://www.facebook.com/reel/1376836884395865/", i: "https://scontent-lhr6-1.xx.fbcdn.net/v/t15.5256-10/755494070_1019999757610301_5840612121675807140_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=102&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=4Fe5nkvsYssQ7kNvwH8AXa2&_nc_oc=Ado4slcQs-4xVTEjXfx_qODpYA_SF7C1O_v6lzleiq9OOjI1-Cvd7O5zOa0MWVH8omg&_nc_zt=23&_nc_ht=scontent-lhr6-1.xx&_nc_gid=TtUJHaQxY1nyV4t1tpzlbA&_nc_ss=7b289&oh=00_AQAvwiKHeCFOcsj8kaHtpLTaOmxrpGwmiJTDtcbcjheeXg&oe=6A6923B0", tr: "اليوم رجعنا لكم بفرش الـ 10D الجلد بالكامل... متوفر منه جميع الألوان: أسود، بيج، رمادي... ومعاه طارة حَبك من النوع الثقيل... كان ينباع بـ 60 و 65 دينار... اليوم عليه عرض، اسألني عن سعره بالتعليقات، والعرض متوفر لنهاية الأسبوع... بنستناكم بجميع الأفرع من 9 الصبح لغاية 2 بالليل... يا بتلحق يا بتروح عليك.", s: "<ul><li><strong>خلق شعور بالإلحاح (Urgency):</strong> ربط العرض بكلمات مثل 'لحق أو بتروح عليك' ونهاية الأسبوع.</li><li><strong>بناء الثقة (Authority):</strong> استخدام لغة خبير (النوع الثقيل، الجلد بالكامل) والمقارنة السعرية.</li><li><strong>استراتيجية التفاعل:</strong> إخفاء السعر وطلبه في التعليقات لرفع خوارزميات الفيديو.</li><li><strong>استهداف النطاق الجغرافي:</strong> تحديد الفروع (عمان وإربد) ومواعيد العمل.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "غطاء تابلو كنتاره و قماش متوفر في معارض الدبل ام...", v: "https://www.facebook.com/reel/2045312383038408/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/755743304_18360285430215801_4750426222300759630_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=107&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=3hiYED1GseYQ7kNvwHqBjdg&_nc_oc=AdoALKkfkx3o_l7LjEBQHib_WIpqHtgfOYuTXck3LQn8Dgxb2XtBKcHOckF8lQt44oi50bEYpAa30Xf40nTEagW&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=LaZzH73DKSsbbYSYLEDN5g&_nc_ss=7b289&oh=00_AQDyaf_H-end3rGxGdigwLyefNe7Jn70LgcFpbbIinzRLw&oe=6A694ABE", tr: "بسم الله الرحمن الرحيم، اليوم جايبينلكم أغطية التابلو، بتيجي للأقمشة أو الكنتارا... مبطنين سيليكون مستحيل يتحركوا... متوفر لمعظم أنواع السيارات، كل اللي عليك تدخل على التعليقات تحت وتكتبلي نوع سيارتك... بنستناكم بالفروع، سلام.", s: "<ul><li><strong>تحديد القيمة التنافسية:</strong> إبراز 'ثبات المنتج' كأهم ميزة (طبقة السيليكون السفلية).</li><li><strong>استراتيجية CTA الذكية:</strong> توجيه المشاهدين لكتابة 'نوع السيارة' في التعليقات لزيادة التفاعل والوصول.</li><li><strong>تقديم الخيارات:</strong> عرض تنوع الخيارات (القماش والكنتارا) لتعدد الاختيارات.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "اخيراً 😶", v: "https://www.facebook.com/reel/2503705946778557/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/752290648_1325055199775076_5082884646012157600_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=107&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=JqJYA-I4atgQ7kNvwFqf0RC&_nc_oc=Adr0Bq1KI6mRSjvgDo-bMRxnVmOrdZIzcXxpuwMiDaFuCWPVT4zz0MZCVEEaY6p6AFX6OlBrJg6eGCQX9NhUS9Xj&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=6bPdgvNHyvhpLvllmfAp5A&_nc_ss=7b289&oh=00_AQCxZPDaPNS5fHECha9EOC7jN3cmtdJkptL8jqWYEKmQvg&oe=6A691CAE", tr: "لا يوجد محتوى صوتي. النص الظاهر: رجع الغالي.. بس مش غالي..", s: "<ul><li><strong>التسويق العاطفي المباشر:</strong> تقديم منتج (منفاخ سيارات محمول) كان يتمتع بشعبية وجودة عالية ('رجع الغالي') بسعر تنافسي ('بس مش غالي').</li><li><strong>التركيز على استعراض المنتج:</strong> الاعتماد على العرض البصري (Product Showcase) لإظهار الجودة دون الحاجة لشرح مطول.</li><li><strong>استهداف الباحثين عن الصفقات:</strong> مخاطبة الفئة التي تبحث عن جودة ممتازة بميزانية منخفضة.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "اسمع صوت صح 🔊 بسعر مميز 🔥", v: "https://www.facebook.com/reel/3439891499503578/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/756038977_2086738329386303_7378259974283029017_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=103&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=2UswqAnT88IQ7kNvwEsZSHk&_nc_oc=AdqYMoiMLYfR0Zl5sp-21OL-O9S6NKY6HeoB-04JjWNFxkp9qCBOOTGS9-nl27boChUnlEjiNvz9kgDFRS57ikLx&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=YuCbtSk5XHw8QzQmhOt_kw&_nc_ss=7b289&oh=00_AQDoTZ6Va2VeBha5IV_k06yYXZpRPG7QMtSuf2JsOvv0jw&oe=6A692B5B", tr: "لأي حدا ما عنده بيس بالسيارة، وبعاني من موضوع الدقة.. اليوم الربيع جابلكم البازوكا... راح توفر بـ طبلون سيارتك مساحة كتير... من شركة مستر سمارت... كل صب 3000 واط... بيجي معها أمبليفاير... استناني عن سعرها بالتعليقات، متوفرة في جميع أفرعنا في عمان وإربد، تركب على أي نوع سيارة.", s: "<ul><li><strong>تحديد المشكلة:</strong> التركيز على نقاط الألم (ضعف مستويات البيس واستهلاك المساحات الكبيرة).</li><li><strong>تقديم الحل:</strong> المنتج كبديل متكامل يوفر مساحة (Compact Design) دون الحاجة لأنظمة معقدة.</li><li><strong>بناء الثقة:</strong> استخدام البرهان الاجتماعي (مستر سمارت) وتحديد المواصفات (3000 واط).</li><li><strong>التشويق:</strong> عدم ذكر السعر مباشرة لزيادة التعليقات وتقليل الحاجز الجغرافي (عمان وإربد).</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "ما في داعي تعاني من ضعف الإنارة في الشارع بعد اليوم‼️", v: "https://www.facebook.com/reel/3373355812835500/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/722994746_893593493819184_481931931187476655_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=104&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=3YXeU5mPbQQQ7kNvwHG0WGj&_nc_oc=Adqngp2qoEjEQMLiNr--Uj-hBag150-xhBfZxdrEZj_8D3Ih7JTG9G3LuEKh3Z_OcFD2p67OiGOq8NeFGLT1Wwcm&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=YuCbtSk5XHw8QzQmhOt_kw&_nc_ss=7b289&oh=00_AQByQBX23Y5ad11G0sqk6zXcgIOj5BB-JKBhKS2_yoFWrA&oe=6A693BF5", tr: "هاي العدسة لازم تكون راكبة بكل السيارات... اضاءة قوية جداً.. خط عيار.. اضاءة مركزة وغير مشتتة... مدى أكثر من 400 متر... بنقدر نركب هاي العدسات على السيارة... راح يكون عليها سنة كفالة خطية.. اكتب نوع سيارتك ليصلك السعر.", s: "<ul><li><strong>الشمولية في الجمهور المستهدف:</strong> التأكيد على أن المنتج يركب على 'كل أنواع السيارات'.</li><li><strong>إبراز الميزات التنافسية (USP):</strong> توضيح نقاط الألم في الإضاءة التقليدية وتقديم الحل (إضاءة مركزة، مدى يتجاوز 400 متر).</li><li><strong>تعزيز الثقة:</strong> تقديم 'كفالة خطية لمدة سنة' لتقليل مخاطر الشراء.</li><li><strong>دعوة ذكية لاتخاذ إجراء (CTA):</strong> 'اكتب نوع سيارتك ليصلك السعر' لجمع الاستفسارات وزيادة معدل التفاعل.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "فن😁🔥", v: "https://www.facebook.com/reel/1023269563945758/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/756342412_935581802890478_2204514280979557416_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=109&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=IPHxxpUPWTcQ7kNvwGHN57E&_nc_oc=Adq3nRAt6zTKFrbGOQJWO3Ig5g9uI8UB4zgZkFx0ISZLuJ6SWDO1TRagXW9JeyJnvBcYMLnh5m6SPXD48Kv7SnL97&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=6bPdgvNHyvhpLvllmfAp5A&_nc_ss=7b289&oh=00_AQDrhiMB1DWVoM4uhI_SuwjwQS8JZ9eW93ueEl8exHkNpw&oe=6A691BC7", tr: "لا يوجد تفريغ صوتي.", s: "فيديو قصير يعتمد على العرض البصري لجودة العمل (فن) لجذب الانتباه دون شرح." },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "اغلب اللي معهم سيارة قديمة بدور على هاي القطعة 🫣🤫", v: "https://www.facebook.com/reel/1585793616417521/", i: "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/755432690_1049140177459032_1079427253218463065_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=108&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=HT7F5vy6dL0Q7kNvwFphl-W&_nc_oc=AdpojaH0A4LLK0x52ZQ9kC17Ze-hI4qxgK-_MpfUi-uMmSGwTuTZdKiT2oyE4uNBtC4&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&_nc_gid=VMSyjQcK2YSAj2sQ0QiVxw&_nc_ss=7b289&oh=00_AQAYwzYFD90bW3vmeIUs1HMfVz_8ehvcq4QSICJo0RbhlA&oe=6A695ADF", tr: "في قطعة موجودة عندنا بس مش الكل بيعرفها، للسيارات القديمة اللي مسجلها ما بيدعم البلوتوث... هاي قطعة بلوتوث بتنشبك على المسجل، رح تقدر تشبك بلوتوث لتلفونك وفيها مايك... زهقت من وصلات الـ AUX وعجقة الأسلاك؟ انسى يا معلم...", s: "<ul><li><strong>تحديد نقطة الألم (Pain Point):</strong> غياب تقنية البلوتوث في المسجلات الأصلية والاضطرار لاستخدام أسلاك AUX.</li><li><strong>تقديم الحل (The Solution):</strong> عرض المنتج كـ 'محول بلوتوث' ذكي يمنح المسجلات القديمة وظائف حديثة.</li><li><strong>تغيير المفاهيم الخاطئة:</strong> التوعية بأن القطعة ليست 'فلاشة' بل 'محول بلوتوث'.</li><li><strong>عامل الجذب:</strong> التركيز على قيمة الأمان (الرد على المكالمات بدون مسك الهاتف أثناء القيادة).</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "ما معك وقت تصلح المكيف؟؟ عادي الحل عنا 🤩👌🏻", v: "https://www.facebook.com/reel/1546465620354006/", i: "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/756768061_1052889980583280_1187299424971804466_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=103&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=Z-3P1bdbB_QQ7kNvwF_BW34&_nc_oc=AdphbP4Sa9TsBbP48174I-dYg9wPx9mfFbwc1hXDNleo5spShS57obvnuxRSfby8_28&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&_nc_gid=VMSyjQcK2YSAj2sQ0QiVxw&_nc_ss=7b289&oh=00_AQA1lum3d52Ujtf-Zf2lh4AsacaEyXs0GbhgMUVeKMvqHQ&oe=6A6954C0", tr: "يحتوي على موسيقى تصويرية. النص المكتوب: الجو ناررر🔥 بس عادي انت معك مروحة تابلو متحركة 360 درجة", s: "<ul><li><strong>معالجة نقطة ألم (Pain Point):</strong> ربط المنتج بمشكلة يعاني منها الجميع (حرارة الجو) لخلق حاجة فورية.</li><li><strong>استعراض عملي وسريع:</strong> التركيز على الجانب الوظيفي للمنتج (سهولة التركيب، الدوران 360 درجة).</li><li><strong>التسويق المباشر (Direct Sales):</strong> تقديم حل مباشر وعملي مناسب لنمط التصفح السريع.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "📍تذكيراً ✅ بستناك👀🚨", v: "https://www.facebook.com/reel/2257298885028560/", i: "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/756038997_1791217631799598_3701437951024194840_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=102&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=BWRqMbijVswQ7kNvwGeK0ED&_nc_oc=AdrAUTwGWBuEcXNx1x2L86TK50oK9aUIl-TiE14i9lBXXVaxdGbIcl1aOlceC6VCoHw&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&_nc_gid=VMSyjQcK2YSAj2sQ0QiVxw&_nc_ss=7b289&oh=00_AQD5MW5o4eirophiqULyDLYs-3cuF9a2loF2XDw9r1qj_w&oe=6A694890", tr: "جاهز؟ تذكيراً بجميع عروضنا في شهر 8: 1- عرض الغاز بأقل الأسعار. 2- عرض الستكر بانوراما بـ 10 دنانير. 3- عرض مظلة للقزاز الأمامي بدينارين. 4- 3 أطقم ليزر بـ 25 دينار. 5- عرض فرش الجلد فقط بـ 21 دينار مع طارة خياطة هدية... جمعة مباركة عليكم.", s: "<ul><li><strong>هيكلية العرض المكثف:</strong> عرض قائمة '5 في 1' لخدمات متنوعة في وقت قصير لضمان بقاء المشاهد مهتماً.</li><li><strong>خلق الحاجة (Pain Points):</strong> تحديد مشكلة العميل (الحرارة، عيوب الطلاء، ضعف الإضاءة) وتقديم الحل بأسعار تنافسية.</li><li><strong>عامل الجذب السعري:</strong> التركيز على 'أقل الأسعار' و'هدايا إضافية' لتحفيز اتخاذ قرار سريع.</li><li><strong>بناء الثقة:</strong> إشراك شخصية 'أبو زيد' لتعزيز المصداقية وبناء علاقة عاطفية مع الجمهور.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "لmdة يومين فقط 🔥🔥", v: "https://www.facebook.com/reel/1783597409727683/", i: "https://scontent-lhr11-1.xx.fbcdn.net/v/t15.5256-10/756846597_1355420906005885_986463895783662611_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=100&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=oibMF63YclYQ7kNvwFTokC0&_nc_oc=AdouZHJB3eotuxCCeU-DsZOiq8AEJIlIsEHEKfMJZ0xWgMwC-yJC2cyvxlc16dwFq20&_nc_zt=23&_nc_ht=scontent-lhr11-1.xx&_nc_gid=50MRS_r97Pjk5eOfhf9bsg&_nc_ss=7b289&oh=00_AQCyKDONKsiNxRYlQMMAdW2N1J_ALs9JHHbiPr3uMfdxsw&oe=6A69636E", tr: "لا تفوتوا الفرصة.. لا بـ 100 ولا بـ 50 ولا بـ 4 ولا بـ 3، فقط بدينارين! وعندك هون تعكس أشعة الشمس والحرارة، بتحافظ على غرفة سيارتك... بتيجي لكل أنواع السيارات، بتركب عالقزاز 100%، فقط بدينارين داخل محل (تكنو برو)... الحق العرض بس لنهاية يوم السبت.", s: "<ul><li><strong>خطاف الانتباه (The Hook):</strong> أسلوب 'التسعير التنازلي' لخلق فضول لمعرفة السعر النهائي.</li><li><strong>القيمة البيعية الواضحة:</strong> حل مشكلة مؤلمة (ارتفاع حرارة المقصورة) بمنتج عملي ومنخفض التكلفة.</li><li><strong>العرض الترويجي:</strong> ربط السعر بمدة زمنية محدودة جداً لدفع المشاهد للشراء فوراً (FOMO).</li><li><strong>الأسلوب الإخراجي:</strong> البساطة والعفوية لتعزيز المصداقية وجعل الإعلان كأنه عرض مباشر.</li></ul>" },
+            { c: "المهندس حسام لزينة السيارات فرع عمان", d: "23 يوليو 2026", t: "#عمان 0799634808 #اربد 0786105445", v: "https://www.facebook.com/reel/1507658710673203/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/755693244_1904528137618183_2497759843740949588_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=107&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=w4Un-GA2tYsQ7kNvwHGxLWv&_nc_oc=Adp_YXwUOc_hh1Xu3szMf5LH7T4gwOfeBSzptIlq-cD7OR06crOBVOJuLTrIKU7CkGANQdGaE86U0lU0jcZt8B3d&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=6GSa0JTUQPS8lVv_K1V15A&_nc_ss=7b289&oh=00_AQBxxSSqi2keDiOGOEZjpWQ4PdFlX9XdTZlG94blOZBoFw&oe=6A6A458A", tr: "ونشوف بسم الله ما شاء الله، شاشة أربعة جيجا رام، أقوى معالج على مستوى العالم... دائماً لما أحكيلك مرسيدس يعني اختصاصنا... شغلنا نظام فيش بفيش، بالإضافة للكاميرا الـ Edge Royal... مرسيدس الـ ML المعلم من أصعب السيارات للشغل... تذكر نوع سيارتك بالتعليقات راح أصدملك بأقوى شاشة.", s: "<ul><li><strong>إبراز القيمة التقنية (USP):</strong> التركيز على أقوى معالج وتوافق كامل مع أنظمة السيارة الأصلية.</li><li><strong>إثبات الكفاءة:</strong> وضع المركز في موقع الخبير المتخصص بسيارات مرسيدس لرفع ثقة العميل.</li><li><strong>الخدمة المتكاملة:</strong> شمل العرض كاميرا عالية الدقة لتعزيز فكرة التجهيز الكامل.</li><li><strong>استراتيجية التفاعل:</strong> طلب 'ذكر نوع السيارة في التعليقات' لبناء قاعدة بيانات للعملاء المحتملين.</li></ul>" },
+            { c: "غازي الزعبي لزينة و كهرباء السيارات", d: "23 يوليو 2026", t: "متخيل بس بدينار واحد 📍", v: "https://www.facebook.com/reel/2256098575157592/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.71878-10/754462802_1805136030480912_7365097610848698945_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=105&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=asGV1JPTaFkQ7kNvwGIL69x&_nc_oc=Adp_cSJrwNXbm7GuUJwcL58audzKZQBny5HYnP8FYceidWhMALtIDdh2zSSL6xKjEO8o5L_YEjXkG0OISMew1KT4&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=u4ScrW2vEUvwGYzQG1splw&_nc_ss=7b289&oh=00_AQDsHVKKFS6qImv6zYLKhnwLoHkWQkqY3XOTyIz3EQL6ug&oe=6A6A4B2E", tr: "ولك تامر شو في عندك اليوم؟ تعال افرجيك.. بس بدينار واحد شو بتقدر تشتري؟ ملمع M7 حبتين بدينار. شريط الغزال الحبة بدينار. ومعطر الداخلية حبة بدينار. وإشارة التاكسي كمان الحبة بدينار. والإنارة المخفية الحبة بدينار... والعرض لمدة أسبوع كامل.", s: "<ul><li><strong>توحيد السعر كعامل جذب (Anchor Pricing):</strong> استخدام سعر رمزي واحد ('بدينار') لخلق انطباع بصفقة رابحة وتقليل حواجز الشراء.</li><li><strong>الإيقاع السريع والتغيير البصري:</strong> انتقالات سريعة مع تكرار عبارة 'الحبة بدينار' لترسيخ الفكرة وتجنب الملل.</li><li><strong>التنوع في المنتجات:</strong> عرض مجموعة متنوعة ليخاطب أكبر شريحة من أصحاب السيارات.</li><li><strong>استراتيجية الندرة:</strong> تحديد العرض بمدة زمنية ('أسبوع واحد') لتشجيع زيارة المتجر فوراً.</li></ul>" },
+            { c: "المهندس حسام لزينة السيارات فرع عمان", d: "23 يوليو 2026", t: "#عمان 0799634808 #اربد 0786105445", v: "https://www.facebook.com/reel/1277078917677902/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/755386079_1526948738476976_9152763754576624913_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=108&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=UBfLPkybi1oQ7kNvwEtT-zr&_nc_oc=AdqeudsY0YwIoNifz14sq_ly3zjHZG_FTGN6K6UPiS_PRFKk-SVBtIkuwl3aUICAXG7Z8oAfuoU0tLpAZy_kMTmQ&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=6GSa0JTUQPS8lVv_K1V15A&_nc_ss=7b289&oh=00_AQDJwlqV6z5YWCUKBduPcLgwQOizoBb1__31a0RSeEQ4Hw&oe=6A6A590F", tr: "هذه شاشات الـ 2K، شاشة من أجمل الشاشات... عندك نظام الكار بلاي، الأندرويد أوتو فعال، البلاي ستور... اليوم معطيك أقوى عرض على مستوى المملكة كاملة... شو ما كان نوع سيارتك بعون الله متوفر، كل ما عليك تذكر نوع سيارتك بتعليق.", s: "<ul><li><strong>استغلال الفيديو القصير:</strong> وتيرة سريعة لجذب الانتباه في الثواني الأولى.</li><li><strong>التركيز على القيمة التقنية:</strong> ذكر نقاط القوة (دقة 2K، أندرويد أوتو، كار بلاي) لإقناع المشاهد بالجودة.</li><li><strong>استراتيجية الندرة والعرض المحدود:</strong> 'أقوى عرض على مستوى المملكة' لخلق دافع لاتخاذ إجراء سريع.</li><li><strong>التحفيز على التفاعل:</strong> طلب كتابة نوع السيارة في التعليقات لرفع معدل التفاعل (Engagement Rate).</li></ul>" },
+            { c: "غازي الزعبي لزينة و كهرباء السيارات", d: "23 يوليو 2026", t: "فرصتك الآن.!! لأصحاب الخبرة فقط ⚠️⚠️", v: "https://www.facebook.com/reel/1009178915226585/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/755867818_18096409904624786_5948413936382416310_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=104&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=_ngqyuJLVHcQ7kNvwHjnweH&_nc_oc=AdoRrPb4Ref1HM-8-90RYPUXPaDB0q5X3aSSyLlFmZHI4JadmD6U8g2K6iGQV20ZvMbWfvrG-HZ3DxYI3ktVfVk2&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=u4ScrW2vEUvwGYzQG1splw&_nc_ss=7b289&oh=00_AQAyd5S7f6HZeweZdv01Kb9OoiMhIEDo8zBGHGGVv6SSFw&oe=6A6A4E81", tr: "لا يوجد تفريغ صوتي متوفر للتحليل.", s: "منشور يعتمد على العنوان الجذاب 'لأصحاب الخبرة فقط' لخلق الفضول والاستهداف المباشر لفئة محددة، مع ذكر الفروع بوضوح لتوجيه الجمهور." },
+            { c: "غازي الزعبي لزينة و كهرباء السيارات", d: "24 يوليو 2026", t: "ليل سيارتك صار نهار! 💡✨ لا تفوت أقوى عرض على لمبات M8 برو...", v: "https://www.facebook.com/reel/1563557245427103/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.71878-10/753337060_1942079329815225_8709759302867411091_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=102&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=h-kve1MgnnAQ7kNvwGFowAp&_nc_oc=AdqJxLuQvBu8YcKFx3jMf0Lpc2d7ZssbB5QaiRXRGwEKlFzRCShryHsyVe0ANw2_pNdUIUUiJMQmm6lhEOHvC0zF&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=u4ScrW2vEUvwGYzQG1splw&_nc_ss=7b289&oh=00_AQBbaojyq2AwHpzGTkkJcn67yzxTqtmT0Ov21VCDqjSPPg&oe=6A6A4B3E", tr: "بسعر التكلفة يا مشاهد.. بوعدك يا مشاهد بسعر التكلفة، ضواو M8 برو 120 واط للمبة الواحدة، إنارة واضحة وأهم إشي ما بتأذي الشخص اللي قبالك، وعليه حرق أسعار... فقط 8 دنانير.. والعرض لمدة 3 أيام وطالع من الفرع الرئيسي؛ دوار الحمايدة... يا بتلحق يا بتروح عليك!", s: "<ul><li><strong>هندسة سعر الجذب:</strong> استخدام عبارة 'سعر التكلفة' و'حرق أسعار' لخلق انطباع بفرصة استثنائية.</li><li><strong>إبراز القيمة المضافة:</strong> التركيز على ميزة تقنية مهمة (إنارة واضحة ولا تؤذي السائقين الآخرين).</li><li><strong>خلق حالة من الاستعجال (Urgency):</strong> تحديد مدة العرض بـ 3 أيام وعبارات تحفيزية لاتخاذ قرار شراء فوري.</li><li><strong>تعزيز الثقة بالتفاصيل المكانية:</strong> ذكر المواقع بدقة لتسهيل التوجه الفعلي للعملاء.</li></ul>" },
+            { c: "غازي الزعبي لزينة و كهرباء السيارات", d: "24 يوليو 2026", t: "يا بتلحق يا بتروح عليك.!!", v: "https://www.facebook.com/reel/1066064892746407/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/753381995_18096553346624786_1872900614920436317_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=102&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=xQB36lq0yR4Q7kNvwFVP-rX&_nc_oc=AdoNXmblxuRwTCjOtl47w5vw9soiWWPEt5H1-3wwwJdR4CIpQxm58mWpyGfbclaX_pO4x_yx6ELdxNDRB_OvBv5x&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=u4ScrW2vEUvwGYzQG1splw&_nc_ss=7b289&oh=00_AQAqmuxzdgcIa4ffCM1wRnpeRfSOuHgk8Uot0cJzVKBEtg&oe=6A6A4BDA", tr: "الحق الحق.. عندك اضواء الأوريكس 85 واط.. عندك اضواء ام 8 برو، ومع ضوء الليد، وعندك على الزوم فينجر اشتغلنا عليها ستيكر ضوئي، بريمبو.. تعال شوف الجمالية كيف طلعت.. معرض غازي الزعبي خيارك الأفضل.. يا بتلحق يا بتروح عليك.", s: "<ul><li><strong>التسويق الميداني القصير:</strong> موجه لجمهور الشباب المهتم بتعديل السيارات.</li><li><strong>عنصر الجذب (The Hook):</strong> أسلوب الاستعجال ونبرة صوت حماسية وسريعة.</li><li><strong>تنوع المنتجات:</strong> استعراض موديلات سيارات (أوريكس، تيسلا، فولكس فاجن) لإظهار القدرة على التعامل مع مختلف الأنواع.</li><li><strong>الرسالة الختامية:</strong> 'يا بتلحق يا بتروح عليك' كأسلوب نفسي قوي لخلق الخوف من ضياع الفرصة (FOMO).</li></ul>" },
+            { c: "2x_for_car.accessories", d: "23 يوليو 2026", t: "الدراسة حقيقية 🌚", v: "https://www.instagram.com/p/DbJJ0QnNjK4", i: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/755207969_18061775567754198_751192212204352229_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gGiLu_h7SZd3Fnb3jVyEJECN_m0Hf4ccqBmnl8vV2OPrMN_cgEfwr8-qsVGxF0ffqHAcT41nR4tA1X3SZlqyKeX&_nc_ohc=EnLb75sno8YQ7kNvwHURhvH&_nc_gid=VTxfmDaolhC5iR1zQLipHg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AQB5aMdJ450CYCzyB0ljmMSkewRsetXFz8T7JACjWVtqvg&oe=6A6A530A&_nc_sid=8b3546", tr: "لما تطلع مع صاحبك وتضيع الطريق... بتعرف إنه دراسة علمية أثبتت إنه 99% من السبب اللي بخليك تنوه الطريق هي رداءة الشاشة... 2X عملك خصم 30% على شاشة الأندرويد الـ 13 إنش، وسماعات الـ DP... بتشرفونا 2X شارع الحرية مقابل ماكدونالدز.", s: "<ul><li><strong>التسويق بالمشكلة والحل:</strong> خلق الفضول بموقف يومي شائع (الضياع وإغلاق الموسيقى).</li><li><strong>ربط المشكلة بالمنتج:</strong> 'أدلجة' المشكلة بصياغة ذكية (رداءة الشاشة كسبب لفقدان التركيز).</li><li><strong>تقديم العرض التحفيزي:</strong> تقديم الحل المباشر مع خصم مغرٍ (30%).</li><li><strong>الخاتمة الإرشادية (CTA):</strong> ذكر اسم المتجر ومواقعه الجغرافية بدقة.</li></ul>" },
+            { c: "2x_for_car.accessories", d: "23 يوليو 2026", t: "أقل سعر بالمملكة و الترند الاول بالمملكة...", v: "https://www.instagram.com/p/DbJaIXouK6K", i: "https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/755034798_1195036789464397_8483018747181889654_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_cat=101&_nc_oc=Q6cZ2gGiLu_h7SZd3Fnb3jVyEJECN_m0Hf4ccqBmnl8vV2OPrMN_cgEfwr8-qsVGxF0ffqHAcT41nR4tA1X3SZlqyKeX&_nc_ohc=Urlql5jfCDYQ7kNvwF0hbge&_nc_gid=VTxfmDaolhC5iR1zQLipHg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AQARJAZKetD0gj8X0tGmhPDtd7PHoJTIfgghWi4kfM6iWQ&oe=6A6A47B7&_nc_sid=8b3546", tr: "اكتب لي 360 عشان أصدمك بالسعر... هاي 4 رام بـ 64 و360، شو يعني 360؟ يعني هاي بيجي معها 4 كاميرات 360 درجة... تقدر تشوف السيارة من فوق ومحيط السيارة بالكامل... اكتبلي 360 عشان أصدمك بالسعر، سلام.", s: "<ul><li><strong>التسويق بالإثارة (Curiosity-driven):</strong> طلب التفاعل المباشر بكتابة '360' لرفع خوارزميات الفيديو.</li><li><strong>القيمة المقترحة:</strong> تحويل تجربة القيادة إلى تجربة فاخرة (مثل التيسلا) عبر الكاميرات المحيطية.</li><li><strong>التأطير التقني:</strong> ربط المواصفات بفائدة عملية ملموسة (رؤية محيط السيارة بالكامل).</li><li><strong>الندرة والتسعير:</strong> تقنية 'الصدمة السعرية' بإخفاء السعر لإجبار المشاهد على التعليق وتوليد عملاء محتملين.</li></ul>" },
+            { c: "2x_for_car.accessories", d: "24 يوليو 2026", t: "لا تخلي نقص الهواء بإطاراتك يعطّلك 🚗💨", v: "https://www.instagram.com/p/DbLN8mkNM0D", i: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/756609820_18061885559754198_1905383389123987685_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gGiLu_h7SZd3Fnb3jVyEJECN_m0Hf4ccqBmnl8vV2OPrMN_cgEfwr8-qsVGxF0ffqHAcT41nR4tA1X3SZlqyKeX&_nc_ohc=IYos82_nIqkQ7kNvwEx9CG0&_nc_gid=VTxfmDaolhC5iR1zQLipHg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AQCwSEyfzS5kfQXgRmlc3Hie3xUljazjq4SQPQz-_oOP4w&oe=6A6A3C79&_nc_sid=8b3546", tr: "يا جماعة، 2X مش بس أقل سعر، بل أفضل جودة... سيارتي نزلت، دخل فيها مسمار ومش عارف أحل المشكلة. 2X ما أعطاه عذر، لأن عنده منتج بيحل هاي المشكلة: منفاخ الجمل... 2X ما بيعطيكم أقل سعر وبس، بيعطيكم أقل سعر مع أفضل جودة.", s: "<ul><li><strong>تحديد نقطة الألم (Pain Point):</strong> مشكلة شائعة (انثقاب الإطار أو نقص الهواء).</li><li><strong>تقديم الحل (The Solution):</strong> عرض المنتج (منفاخ الجمل) كحل عملي وفوري لبناء الثقة في خبرة المتجر.</li><li><strong>تعزيز القيمة المقترحة:</strong> تكرار شعار 'أقل سعر مع أفضل جودة' لكسر حاجز التردد.</li><li><strong>التسويق المكاني:</strong> تفاصيل جغرافية دقيقة لتسهيل الوصول للمتجر.</li></ul>" },
+            { c: "2x_for_car.accessories", d: "24 يوليو 2026", t: "السماعات ب٧ دنانير ! ☎️:0797146667", v: "https://www.instagram.com/p/DbLjhyHtqdp", i: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/753582951_1023968037030611_7646185872634376986_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_cat=111&_nc_oc=Q6cZ2gGiLu_h7SZd3Fnb3jVyEJECN_m0Hf4ccqBmnl8vV2OPrMN_cgEfwr8-qsVGxF0ffqHAcT41nR4tA1X3SZlqyKeX&_nc_ohc=zpf9tq3StuwQ7kNvwHNal62&_nc_gid=VTxfmDaolhC5iR1zQLipHg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AQDZusZ7YyinQNP_vEbrWP7WVpb0g5vgRxjJoqYv-KXBdg&oe=6A6A5C82&_nc_sid=8b3546", tr: "المشتري: أنا هسه بدي أفهم مين اللي سامحلك تبيع بالسعر هاد؟ / البائع: هي أوامر.. العرض الكبير! (يتم وضع بصمة بالإبهام) / المشتري: يعني هسا من السماعات الدائري بسبع دنانير، والبيضاوي بعشر دنانير؟ / البائع: لمدة يومين، وبالفرعين... الكمية موجودة بس لحق حالك فيها.", s: "<ul><li><strong>التسويق بالإلحاح (Urgency Marketing):</strong> حوار تمثيلي لافتراض استنكار العميل للسعر لخلق صدمة (Shock Factor).</li><li><strong>استراتيجية التوثيق:</strong> حركة 'البصمة' كأداة بصرية لإيهام المشاهد بجدية العرض ومصداقية التخفيضات.</li><li><strong>عنصري الزمان والمكان:</strong> التأكيد على عرض 'لمدة يومين فقط' (Scarcity) وتوضيح أماكن الفروع لتقليل احتكاك العميل.</li><li><strong>اللغة التسويقية:</strong> عبارات تحفيزية مباشرة (لحق حالك) لزيادة وتيرة الإقبال.</li></ul>" },
+            { c: "2x_for_car.accessories", d: "24 يوليو 2026", t: "احمِ فرش سيارتك واخفي العيوب", v: "https://www.instagram.com/p/DbL0eZZtP5R", i: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/756525049_18061939883754198_6034060881132577442_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_cat=106&_nc_oc=Q6cZ2gGiLu_h7SZd3Fnb3jVyEJECN_m0Hf4ccqBmnl8vV2OPrMN_cgEfwr8-qsVGxF0ffqHAcT41nR4tA1X3SZlqyKeX&_nc_ohc=58p57bgVnkEQ7kNvwFWJy-z&_nc_gid=VTxfmDaolhC5iR1zQLipHg&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AQCYWCh6KI_5pm9RkoByWerX2vNc8U3rbicejIkPIqWpMw&oe=6A6A4910&_nc_sid=8b3546", tr: "كل سيارة فينا، كراسيها تعبانة، أو بدك تحافظ على كراسيها... تعالوا أفرجيكم 2X شو موفر لكم.. وفرنا لكم الوجه الكتان، طلعوا ناعم كتير.. متوفر بجميع ألوانه... معمول عليه عرض سعر كتير مرتب... 2X مش بس أفضل سعر، أفضل سعر وأفضل جودة.", s: "<ul><li><strong>تحديد نقطة الألم (Pain Point):</strong> مشكلة اهتراء مقاعد السيارة أو الرغبة بالحفاظ عليها.</li><li><strong>تقديم الحل (Product Showcase):</strong> استعراض المنتج بوضوح مع التركيز على الملمس والتصميم.</li><li><strong>بناء الثقة والمصداقية:</strong> ربط هوية العلامة التجارية (2X) بالجودة والسعر التنافسي (القيمة مقابل المال).</li><li><strong>استراتيجية التكرار:</strong> استخدام شعار 'أفضل سعر وأفضل جودة' لتعزيز تذكر العلامة التجارية.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "‼️الفرن الحراري المخصص لفكّ الإضوية💯✨", v: "https://www.facebook.com/reel/3184589845074130/", i: "https://scontent-lhr11-1.xx.fbcdn.net/v/t15.5256-10/752833182_1883260586412568_6600738870002094395_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=100&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=1hJdvffWWUUQ7kNvwERCPeU&_nc_oc=Adp4_NxPuY5NktC_IYvz23mETj-grxYnVq8HrIWbk4HqS-4KtJLPCRwbS2kUXMXvbag&_nc_zt=23&_nc_ht=scontent-lhr11-1.xx&_nc_gid=50MRS_r97Pjk5eOfhf9bsg&_nc_ss=7b289&oh=00_AQBv55kp497HugTRjarEVo3bWn-Fi6YXZ4Xnwb3Up74sug&oe=6A698127", tr: "بأحدث الماكينات، بدي أرجعلك إياهم وكالة... ما بكسرلك إياهم أبداً. رجعت القزازة وكالة مع العدسات... بأحدث المواد الألمانية رح أعمل لك بولش، بالفرن الحراري بدون ما أكسرلك إياهم، الشغل مكفول لمدة سنة... بأقل سعر على مستوى المملكة عند محلات الربيع.", s: "<ul><li><strong>التركيز على القيمة المضافة:</strong> إبراز التباين (قبل وبعد) لتوضيح جودة الخدمة واستعادة 'حالة الوكالة' دون استبدال.</li><li><strong>التخويف الإيجابي:</strong> ضمان 'عدم الكسر' أثناء الفك، وهي نقطة ألم رئيسية لدى أصحاب السيارات.</li><li><strong>التسويق عبر الضمانات:</strong> تقديم كفالة لمدة سنة لتقليل مخاطر الشراء.</li><li><strong>الاستهداف المحلي:</strong> تحديد الموقع الجغرافي بدقة (دوار الحويان - إربد).</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "شوف الجديد✅", v: "https://www.facebook.com/reel/27874004888902338/", i: "https://scontent-lhr11-1.xx.fbcdn.net/v/t15.5256-10/753880846_2459807424543482_4196928186699994831_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=101&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=f_te-fW-8BMQ7kNvwErc0mf&_nc_oc=Ado7cxxPKuyfC-2oYZsvWGInrUntYUt02nyeH6oxSHmFZTB1vLvISngEswuvj9znlKQ&_nc_zt=23&_nc_ht=scontent-lhr11-1.xx&_nc_gid=50MRS_r97Pjk5eOfhf9bsg&_nc_ss=7b289&oh=00_AQAZnd2PoMWjalAiiCP6Fu05RBDHhab5PlJxBFNbcK5TNw&oe=6A694DB0", tr: "طبعاً يا شباب هذا السقف الجديد، ستار لايت (Starlight)... وهذا المسند الجديد يجي فيه حامل أكواب، ومخرجين شاحن، وبكيت فاين، وإستنج.. عرض الفرش لسه مستمر، فقط بـ 21 دينار، وبتاخد معاه كمان غلاف طارة خياطة.. أفضل الأسعار داخل مخازن الربيع.", s: "<ul><li><strong>عرض القيمة التنافسي:</strong> الجمع بين الجمالية (إضاءة السقف) والعملية (مسند ذراع مطور) لتوفير قيمة مضافة.</li><li><strong>استراتيجية السعر الجاذب:</strong> استخدام سعر مخفض '21 دينار' مع هدايا إضافية كخطاف لجذب العميل.</li><li><strong>التسويق بالدليل الاجتماعي:</strong> عبارات مثل 'بسم الله ما شاء الله' لتبني الثقة بجودة العمل.</li><li><strong>الأسلوب الترويجي:</strong> استعراض المنتج أثناء استخدامه (Hands-on demo) لإظهار جودة التشطيبات.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "جمالية قصه بازوكا دبل 2026 .. اسالني عن سعر بتعليقات...", v: "https://www.facebook.com/reel/1012545778292022/", i: "https://scontent-waw2-1.xx.fbcdn.net/v/t15.5256-10/755414007_1609663877343368_7263531917536366364_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=110&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=O8YHcTBrCCgQ7kNvwEGpAKW&_nc_oc=AdpKHVvfnUtCAEpzjCdPEIYoD0-Jb3AmiIlC_ASQRmvMAJb5Gkn9fDPv6dA-DIB8fUQ&_nc_zt=23&_nc_ht=scontent-waw2-1.xx&_nc_gid=SeZ1_102rqyYWVU4tYahWA&_nc_ss=7b289&oh=00_AQBOpaipHpRf5QwsuU5ckWY27TyC9r4cno9Wc3Vl_sVdvQ&oe=6A697559", tr: "اسمع الصوت، اسمع الصوت. عندك هون صبين مع تويترين، راح يعطيك كل واحد فيهم 4400 وات... دقة كثير بتجنن... بزوكا الدبل.. ما بدك تركب سيستم؟ استني على السعر بالتعليقات لجميع أنواع السيارات... هذا هو الربيع، ربيع دك اليمين، محطتنا في شارع المدينة.", s: "<ul><li><strong>الاستهداف المباشر:</strong> استهداف عشاق تعديل السيارات والبحث عن تجربة صوتية قوية.</li><li><strong>عنصر الجذب الحسي:</strong> إشراك المشاهد في تجربة 'الصوت' فوراً لكسر حاجز الملل.</li><li><strong>إبراز القيمة التقنية:</strong> التركيز على مواصفات دقيقة (4400 واط) لتعزيز الثقة.</li><li><strong>استراتيجية التفاعل:</strong> 'السعر في التعليقات' لزيادة معدل التفاعل وتحسين ظهور الفيديو.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "مري باتمان مخصص ❤️🔥", v: "https://www.facebook.com/reel/1626335075776061/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/755867884_1347398796971538_4582119379280201737_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=111&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=-cjsD-GSia8Q7kNvwH2U5XA&_nc_oc=AdrqpWrnvbjYufecfjcvE-Jk0lbHBCP26R2xPKfAXhrBVMTtF6lfz1bHwAAkzQtb0d95UuQ_YmNfeYekqNi1mosu&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=_c85yN9MYmqU8m6gtRlW-A&_nc_ss=7b289&oh=00_AQDb4t516pBFp-bfqHWSJMqbtEZnoJa3jw9zfOwgB_eh9g&oe=6A698484", tr: "تسعة وتسعين بالمية من أنواع السيارات لها مرايا بتنطي من داخل محلات الربيع.. شوفوا كيف أعطتنا جمالية، وموجود منها مخصص لجميع أنواع السيارات.. كل اللي عليك أنك تكتب نوع سيارتك بالتعليقات ليصلك.", s: "<ul><li><strong>خطاف قوي (Hook):</strong> إحصائية لإثارة الفضول حول منتج غير متوفر للجميع.</li><li><strong>إبراز القيمة الجمالية:</strong> التركيز على التغيير الجمالي الذي يضيفه المنتج، مخاطباً الجانب العاطفي.</li><li><strong>تحديد التوافر (الشمولية):</strong> طمأنة المشاهد بتوفر المنتج لجميع أنواع السيارات.</li><li><strong>دعوة واضحة لاتخاذ إجراء (CTA):</strong> طلب التفاعل لتوليد العملاء المحتملين (Leads).</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "عطاء خارجي وداخلي على الهونداي 🔥❤️ بافضل الاسعار...", v: "https://www.facebook.com/reel/27462651443403469/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/755432758_1961327311212061_8359174524348631961_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=100&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=c_QTOtaKCBcQ7kNvwG2IQKI&_nc_oc=AdrbkCGWCx2ZovnwW0dhUQ96srRacbRsOCvSqLs0nnH8nONhqTF7SLAbPcmg_ED57eqg-1TpUHcd7O25h6Ya6Jyo&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=_c85yN9MYmqU8m6gtRlW-A&_nc_ss=7b289&oh=00_AQDqREeDNUOS2Q4hfTjCHhHn-90pRlIFjy2ZFw2NTsLonQ&oe=6A699997", tr: "صاحب السيارة: الشباب مرتبين، الأسعار مناسبة للجميع، ركبوا لنا إضاءات زينون، مرشات، الشغل مية مية. المعلق: أكثر الشغلات اللي بحبها هي الإكسسوارات الخارجية.. ركب معنا كت كامل على الهونداي.. فول باكج بتيجي على التابلو وأربع بطاين.", s: "<ul><li><strong>بناء الثقة عبر الشهادات الحية:</strong> مقابلة مع عميل حقيقي يمدح الخدمة والأسعار.</li><li><strong>التركيز على القيمة المضافة (USP):</strong> إبراز الجماليات والإضافات الرياضية والعصرية.</li><li><strong>هيكلة العرض:</strong> استعراض بصري سريع للتفاصيل الدقيقة (قبل وبعد / الإبراز).</li><li><strong>الجاذبية البصرية:</strong> موسيقى عصرية وإضاءة جذابة في توقيت الغروب تخدم فكرة تزيين السيارات.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "اقوى نسبة عزل فعلي من ال Ultra shield 👏🔥", v: "https://www.facebook.com/reel/2393892024473992/", i: "https://scontent-cdg4-1.xx.fbcdn.net/v/t15.5256-10/754535906_1237492515096562_5241961830283681009_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=102&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=IhMIW0VjIRkQ7kNvwFRG7Ce&_nc_oc=AdpDt5T4ZeA65fI5w_h7vz3hym_7Wxc3BSwEtLxs5MSJyH8wj_v5RS8WVXrgGB5Fk6c&_nc_zt=23&_nc_ht=scontent-cdg4-1.xx&_nc_gid=aiSuZlzdm4Kov3j6s6ggbw&_nc_ss=7b289&oh=00_AQB4ATIZ13xaWZBoGMjAu7o6QXDS1iWWQXzTEYLYByYemA&oe=6A699E16", tr: "هذا أكثر تظليل طاقة تقدر تركبه، هذا تظليل الألترا شيلد، لأنه شفاف وبنسبة عزل فعلي 99.8%... تظليل الألترا شيلد شفاف وبنسبة عزل فعلي 99.8%، فقط داخل محلات الربيع.", s: "<ul><li><strong>تحديد نقطة الألم (Pain Point):</strong> الاعتقاد الخاطئ بأن العزل القوي يتطلب تظليلاً داكناً.</li><li><strong>استراتيجية الأرقام المحددة:</strong> استخدام نسبة عزل دقيقة (99.8%) لمنح المنتج مصداقية عالية.</li><li><strong>التسويق الحصري (Exclusivity):</strong> حصر المنتج في 'محلات الربيع' لتوجيه العميل مباشرة.</li><li><strong>التنفيذ البصري (Visual Proof):</strong> دمج لقطات واقعية لعملية التركيب لكسر حاجز الخوف.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "غطاء تابلو كنتاره و قماش متوفر في معارض الدبل ام...", v: "https://m.facebook.com/doublemamman/posts/pfbid02ou8xH8zRB5R7NmGjqvRGBFnY4EAebtg52rgktn1WG56Gmw98WwR8kCFMRayjP41ul", i: "https://scontent-cdg4-2.xx.fbcdn.net/v/t51.82787-10/755743304_18360285430215801_4750426222300759630_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=107&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=3hiYED1GseYQ7kNvwH8-d4F&_nc_oc=Adqxlukgdp8gzg0X4dpED1kpEB_LhZH-ZmETpE1V-isXX1NxjMTk11PvdE9eONN6TD4&_nc_zt=23&_nc_ht=scontent-cdg4-2.xx&_nc_gid=f2rQ8AlNsccEuojznKNxWw&_nc_ss=7b289&oh=00_AQD-rarPJMJLiRewpF145EIuTie1L0CftYFMQvl4h77YDQ&oe=6A694ABE", tr: "لا يوجد تفريغ صوتي (منشور مكرر بصورة).", s: "منشور يعتمد على الصورة لتذكير الجمهور بتوفر أغطية التابلو للسيارات بمختلف الخيارات." },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "شوف الوضوح ✅", v: "https://www.facebook.com/reel/1314367264014519/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/754579478_927363347057508_1355216937220443169_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=102&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=CW5zK7zygigQ7kNvwGYdl9L&_nc_oc=AdqWvrPyCGrLyQAEK_Cpt1lHED07JtAbEH8TUS1Ilu4uylrfC3LTbfxpeWAxamirKwYWH1Eeyfwfmpg3jRTGaT8t&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=Y4ZBdPYbapcr6Wwa5XwGdg&_nc_ss=7b289&oh=00_AQBHjuYIQWh2NsOEtx44GLwf-wsD96DWdH-WTqzeVtZ4Lw&oe=6A69DB21", tr: "تظليل 100%.. من برا، وقرّب، ورجي العالم يشوفوا أي إشي. بسم الله ما شاء الله، ولا كأنك حاطط إشي، وضوح 100% لكل أنواع السيارات. أفضل الأسعار داخل محلات الربيع، وتحت أيدي متخصصين.. بالفرع الرئيسي مقابل بنك صفوة.", s: "<ul><li><strong>إعلانات الخدمات السريعة:</strong> إبراز الميزة التنافسية (الخصوصية من الخارج والوضوح الكامل من الداخل).</li><li><strong>عنصر الجذب البصري:</strong> التصوير الميداني (POV) من داخل السيارة لبناء الثقة وتوضيح النتيجة.</li><li><strong>بناء الثقة:</strong> الربط بين اسم المحل ووجود 'متخصصين' لإعطاء انطباع بالأمان.</li><li><strong>الدعوة لاتخاذ إجراء (CTA):</strong> توجيه جغرافي دقيق (الفرع الرئيسي مقابل بنك صفوة).</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "اجاك تشيك انجن ؟ راح تلاقي الحل عنا ✨️🚗", v: "https://www.facebook.com/reel/1749213863101701/", i: "https://scontent-lga3-2.xx.fbcdn.net/v/t51.71878-10/755264139_2819225308453095_7493805883084098888_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=105&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=gvgcGB3wffAQ7kNvwGakpLn&_nc_oc=AdrWuQNdNhqBFJHgKev7AWgSF1Aycx3FcsPwQc0nwfWq-5bKv6HNdJZsLG1n7RmtMkM&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=uVU8sf8vgxCg8f5VDHXlTQ&_nc_ss=7b289&oh=00_AQCg7yCZKAOwvWg2--q1s1STLTFOYGFhTnzxF5TUtOZBog&oe=6A695ABD", tr: "أويدجل، يوم اللي يطلعلك (تشيك إنجن) ومش عارف شو المشكلة، بسيطة عزيزي.. جيبها على (دبل إم) وبنفحص لك السيارة بأحدث الأجهزة... ودامك جاي، افحص الـ AC... متوفر عنا أجود أنواع الغاز بالسوق، غاز إيطالي... اكتب لي بالتعليقات شو مشكلتك، الـ (دبل إم) بظهرك.", s: "<ul><li><strong>تحديد نقطة الألم (Pain Point):</strong> مشكلة شائعة ومزعجة (ظهور إضاءة تشيك إنجن).</li><li><strong>تقديم الحل:</strong> تقديم المركز كـ 'منقذ' سريع يعتمد على التكنولوجيا الحديثة.</li><li><strong>سياسة البيع المتقاطع (Cross-selling):</strong> استغلال وجود العميل لتقديم خدمة إضافية (فحص التكييف).</li><li><strong>بناء العلاقة:</strong> استخدام عبارات مثل 'دبل إم بظهرك' لتعزيز الولاء للعلامة التجارية.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "🚨لحقت عرض البانوراما 🔥🔥", v: "https://www.facebook.com/reel/1688430245713090/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/755364325_870189135859518_6081465161505664269_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=108&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=Y6adyy6snuYQ7kNvwEhkoXl&_nc_oc=AdrSIobegixdYuzHzI_Idpu_XpXzr08-RSWXVfb_qBTSW1Ha2g2DF7EIv_FAhxGyM5VZRecXfsMoShemlgShe0RA&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=m9Sz6aKzxIgQ_PCqcQgfoQ&_nc_ss=7b289&oh=00_AQAc_D0fXwWl7VFR2OAeCiAPaf-BD6yalpckvLKHoFwxqA&oe=6A6A3231", tr: "يحتوي على مقطع غنائي شعبي. يعرض الفيديو خدمة 'تغليف سقف السيارة' (Car Roof Wrapping) بسعر مغرٍ (10 دنانير أردنية).", s: "<ul><li><strong>القيمة العرضية:</strong> تقديم عرض سعري مغرٍ جداً لتغليف سقف السيارة كمحفز قوي.</li><li><strong>استراتيجية التوثيق (Behind the Scenes):</strong> توثيق عملية التغليف بالكامل لتعزيز الثقة في كفاءة الفنيين.</li><li><strong>عنصر الجذب البصري:</strong> موسيقى تريند وإيقاع سريع مع انتقالات تجمع بين الفكاهة والاحترافية.</li><li><strong>الهوية والترويج:</strong> إبراز اسم وشعار المركز لربط الخدمة بالعلامة التجارية.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "🔥 عروض الخميس - الجمعة - السبت 🔥 لا تفوّتوا عروض DOUBLE M...", v: "https://m.facebook.com/doublemamman/posts/pfbid02YMic3Z3kFV743KV411Wjm51AdRSWj1Cbin9FD6SNcu75rGm8uU7NPQqeEqTE4eVUl", i: "https://scontent-lga3-1.xx.fbcdn.net/v/t51.82787-15/755332516_18360306619215801_6129997234874219782_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=103&ccb=1-7&_nc_sid=e5c1b6&_nc_ohc=7kO6I4tLR-kQ7kNvwEt17pq&_nc_oc=AdoUa11_rQiOYRGlEbvhWsfnFySmX_awYvF62zTU3ahcx3vcOPs1dpBOYxFVHjEh9SI&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&_nc_gid=uVU8sf8vgxCg8f5VDHXlTQ&_nc_ss=7b289&oh=00_AQA4QqdduUJfsYbqKo_CHExPMYG-wliQXcpNUBXXi5dT5A&oe=6A696E5D", tr: "لا يوجد تفريغ صوتي.", s: "منشور نصي وصوري للترويج لعروض نهاية الأسبوع وإعلان الخصومات الشاملة على تشكيلة المنتجات." },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "اجمل الموديلات من ال SR 🙌🏻🔥", v: "https://www.facebook.com/reel/1423393909613720/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/755734686_1046295257798538_2098665820526656132_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=106&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=2rxfw1wyfyYQ7kNvwFv_AEU&_nc_oc=AdpwhYSh7xd_Xh-ec5ToKd-zBCx7aa6u83nMobSbP2gJe9k8C2MBwW8TSITSXWiWhLlyQI5SiJjrlg7TlBW6rHXV&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=v1RFhuOAe5D8sma_7tTRfg&_nc_ss=7b289&oh=00_AQCzEhIebDu1ivkywjEXWlV-IKAr-ErzbZkMt2Vu5cvcyw&oe=6A6A4D87", tr: "أمامك طارات، هذه طريقة تركيب محلات، في موديلات وأنواع... طلع بطريقة ولا أحلى، حماية لـ Steering سيارتك وبنفس الوقت بتضيف لمسة جمالية، الموضوع كتير بسيط، كل اللي عليك تحكي لي تم بالتعليقات ببعتلك كامل الموديلات والسعر.", s: "<ul><li><strong>إثبات الجودة (Visual Proof):</strong> استعراض النتيجة النهائية للتطريز اليدوي لإعطاء انطباع بالجودة والاحترافية.</li><li><strong>القيمة المقترحة:</strong> الجمع بين الحماية (عملية) والجمالية (شكل جذاب).</li><li><strong>دعوة لاتخاذ إجراء (CTA):</strong> استراتيجية التفاعل الذكي (كتابة 'تم') لزيادة خوارزميات التفاعل وتوليد العملاء المحتملين.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "وين الي بعاني من الاصفرار 🤔🚗؟", v: "https://www.facebook.com/reel/1530697955198567/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.71878-10/756757618_1023100800509979_7577485612006136918_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=108&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=46n1ID9rWE4Q7kNvwH_Aqoz&_nc_oc=Ado0iDnOrWdOBFlywgsaYiPi4MeyKz1s0f_6LXB6-HeOr3-z0uTIur3pSFFEJGKPA8c&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=UXdC3m1vPpA09bcUdndQrQ&_nc_ss=7b289&oh=00_AQA5lTqLMcykLbogk2QVGnFelv5_y6BFSdkV_wnuPzbveg&oe=6A698D87", tr: "وين الحل من اصفرار الإضاءة؟ شوف شو جبت، منتج سحري من كويكس، بتشتغله بإيدك وبدقائق... هذا المنتج راح يخليك تعمل بولش للإضاءة قدام بيتك، بدون ما تخسر فلوس البولش... اكتب لي كويكس عشان يصلك عنه كامل التفاصيل.", s: "<ul><li><strong>تحديد المشكلة (Pain Point):</strong> التركيز على مشكلة شائعة (اصفرار إضاءة السيارة).</li><li><strong>تقديم الحل العملي:</strong> طرح المنتج كحل بديل وموفر (DIY) يغني عن زيارة مراكز الصيانة.</li><li><strong>إظهار سهولة الاستخدام:</strong> التركيز على سرعة وسهولة تنفيذ الخدمة (دقائق، بإيدك).</li><li><strong>دعوة واضحة (CTA):</strong> طلب كتابة كلمة معينة لزيادة التفاعل وجمع بيانات العملاء.</li></ul>" },
+            { c: "الربيع لكهرباء وزينة السيارات", d: "24 يوليو 2026", t: "جولة الربيع الفرع الرئيسي 👏🔥", v: "https://www.facebook.com/reel/2127420911541350/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t15.5256-10/756342101_1753383232659930_5563845518841100570_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=101&ccb=1-7&_nc_sid=1a6f08&_nc_ohc=JMyjGLyIZk0Q7kNvwHrre6u&_nc_oc=AdoaibW7y8PwxymXIwdJOYg8MKR1fqdOzW7ZvWQAOotyqX0zmanaxZ1XOZW-223FM6z4f1k6hoiwQELo4NFJaosG&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=M-INApajrZeFj3jBqxyWwA&_nc_ss=7b289&oh=00_AQDgkqO3N3hI5WBWe18cZwB_HqGsfEjU6E0AgwQ9mWaJCA&oe=6A6A45E1", tr: "هاد الفان بدنا نعمله سقف رولز رويس... ضباب غير مخالف شفاف بيعزل حرارة 99.8 (الألترا شيلد)... طقم إضاءة داخلي كامل... بـ 21 ليرة تعال خد فرش جلد كامل... عندنا سيارتين عليهم سيستم على قيد التركيب... بتشرفونا بأي فرع.", s: "<ul><li><strong>استعراض الخدمات:</strong> تغطية نطاق واسع من التعديلات (تنجيد أسقف، عازل، إضاءات، فرش جلد).</li><li><strong>خلق حالة من الثقة:</strong> إظهار العمل 'تحت التنفيذ' لإعطاء انطباع بحركة عمل مستمرة.</li><li><strong>عروض تنافسية:</strong> التركيز على السعر (21 ليرة للفرش) كاستراتيجية جذب.</li><li><strong>تعزيز الهوية:</strong> التركيز على التوسع الجغرافي وربط المركز باسم 'ثائر البحر' لإضفاء موثوقية شخصية.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "لما تداوم بيوم عطلتك🥲", v: "https://www.facebook.com/reel/1610180477282853/", i: "https://scontent-cdg4-3.xx.fbcdn.net/v/t51.82787-10/755390484_18360318484215801_8158582438977648239_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=110&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=94vMXgzNGSEQ7kNvwF_c20M&_nc_oc=Ado0K7YwsACLL5Tg_b4wkJenPqqoUt1BN44O-pCIiY9qdHqN7UE9OOgK7GExHNJYE-Q&_nc_zt=23&_nc_ht=scontent-cdg4-3.xx&_nc_gid=cfWmV30m-PsYZyuGPQWK-w&_nc_ss=7b289&oh=00_AQDzyrsWlmcuIVPY9k9IBYq7MAGOZ9QADON_7840_ud8XA&oe=6A698581", tr: "POV: لما تداوم بيوم عطلتك 😂 أهلا وسهلا.. موجود لحد بعد بكره السبت... معلش وبنستقبلكم من 8 لحد 12، بالنسبة لعروضنا، فرجوا الجي بي، خصم 30% وبالنسبة لشاشة الدبل إم بخصم 25%... بدك كيف يا ولد الدبل إم؟... تابعوا على الصفحة ورح تشوفوا عروض جديدة.", s: "<ul><li><strong>المحتوى الفكاهي المرتبط ببيئة العمل:</strong> تحقيق التفاعل وزيادة الانتشار (Viral Content) عبر المفارقة الكوميدية.</li><li><strong>دمج الترويج بالمزاح:</strong> تمرير رسائل تسويقية مباشرة (عروض وخصومات) خلال الكوميديا.</li><li><strong>عنصر الواقعية:</strong> لمسة بشرية وعفوية (طلب القهوة) تكسر جمود الإعلان التقليدي.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "تم عزل المركبه بالكامل بتظليل الترانانو من Cariva😎", v: "https://www.facebook.com/reel/1544175703823695/", i: "https://scontent-cdg6-1.xx.fbcdn.net/v/t51.82787-10/755867986_18360325636215801_2144462116391820717_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=106&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=SiG_ym74xAUQ7kNvwHfslPu&_nc_oc=AdrCmtjUqpJ_uAf0Yt4CovLQ0XgJ07Ik6zl0KRaqfQNJ3u24PQmc1VoecTM_xoVQwD4&_nc_zt=23&_nc_ht=scontent-cdg6-1.xx&_nc_gid=cfWmV30m-PsYZyuGPQWK-w&_nc_ss=7b289&oh=00_AQBhd1mfd-RlTVvIB26I4sfjLJaUfyY4sTiJzaTHKPBLSA&oe=6A697D00", tr: "لو حابب تعزل سيارتك من تضليل الـ Ultra Nano من شركة Cariva، هاد التضليل بحب أحكيلك إنه متوفر فقط في معرض دبل أم. واكتبلي تضليل Ultra Nano بالتعليقات، وأهلا وسهلا بالجميع.", s: "<ul><li><strong>الاستهداف الفعال:</strong> استهداف فئة محددة من أصحاب السيارات الفارهة المهتمين بالعوازل عالية الجودة.</li><li><strong>بناء الثقة عبر العرض البصري:</strong> لقطات تصوير احترافية ومقربة لعملية التركيب لتجسيد الجودة.</li><li><strong>استراتيجية الحصر (Exclusivity):</strong> ربط المنتج بمكان واحد فقط ('معرض دبل أم') لخلق قيمة للمنتج.</li><li><strong>الدعوة لاتخاذ إجراء (CTA):</strong> طلب التفاعل المباشر لزيادة نسبة الانتشار وتوليد العملاء المحتملين (Leads).</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "جوله سريعه في كراج الدبل ام 😍", v: "https://www.facebook.com/reel/1511828203574155/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/755735639_18360333553215801_503413826703949680_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=109&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=H6aZ4Z2pQvoQ7kNvwFx15RN&_nc_oc=Adp29QdJwE6YEkRL8sjqiSRJNhKnIkS3Pr3eFdOP_8teWgQ-BHGUO58CQ5LPyqGIKm9oQmhOxFDvJTUpdzHFq-VS&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=BXUx-NaxiFCmgH9tfJyVlA&_nc_ss=7b289&oh=00_AQABGiL1hfwsfdpaEfckWxkvdDHC21mBWm00Ea9Fgl8cMQ&oe=6A69835C", tr: "الجمعة يوم الجمعة، تعال معي جولة... أفخم كراج بالمملكة كلياتها، كراج دبل إم... بنخاف على سيارتك، نزلنا البطانية عشان المي والتظليل... وصاحب السيارة مستغل أكبر خصم على فرش الجي بي... عندك بي واي دي ركب عليها كت مخصص كامل... شيك على دورة المكيف... استغلوا عروضنا بس لبكرة.", s: "<ul><li><strong>بناء الثقة (Trust Building):</strong> إظهار الحرص على سلامة السيارة أثناء العمل (استخدام أغطية واقية).</li><li><strong>استراتيجية البيع العابر (Cross-selling):</strong> استعراض حزمة خدمات متنوعة (تظليل، فرش، كيت، مكيفات).</li><li><strong>خلق شعور الاستعجال (Urgency):</strong> العروض المؤقتة ('بس لبكرة') لدفع المشاهد لاتخاذ قرار سريع.</li><li><strong>أسلوب التسويق الاجتماعي:</strong> التفاعل مع طاقم العمل يضيف مصداقية ولمسة إنسانية.</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "كشاف+ماده فسفوريه🤔🤔🤔", v: "https://www.facebook.com/reel/1034956882238009/", i: "https://scontent-ams2-1.xx.fbcdn.net/v/t51.82787-10/755440601_18360334558215801_9209845155894420979_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=111&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=8yztD7WVrdEQ7kNvwEa7XSu&_nc_oc=AdqkU4BhZoKggGCJ48X6M798dyawlAFgeYEaIQFbp_5HSAF6zcPzxIcCrR8bgfEMvTBLKII0xx4GNVDGCqhLsOA0&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=RC5B1G1nFxsUJvYr-p1JIg&_nc_ss=7b289&oh=00_AQDLx7AaKOSyqPDXcnfkC272RvfSmYbopszWskv2gvQnlQ&oe=6A6A1BF2", tr: "هذا الجهاز راح نستخدمه، وهذا الغاز راح نحطه، راح نشحنه بمواسير المكيف عشان نكتشف التهريب... تعال Double M، في مشكلة بسيارتك سواء غاز أو أي مشكلة، تطلع من Double M بتكون مشكلتك محلولة 100% على الطريقة التقليدية والأصلية... بنضغط عن طريق ماكينة الويرث الألمانية... مستقبلكم لحد الساعة 12 بالليل.", s: "<ul><li><strong>تحديد المشكلة والحل:</strong> معالجة نقطة ألم (مشاكل المكيفات وتسريب الغاز) وتقديم معدات تقنية متقدمة (ماكينة ويرث الألمانية).</li><li><strong>بناء الثقة والمصداقية:</strong> استخدام مصطلحات مثل 'الطريقة الأصلية' و'حل المشكلة 100%'.</li><li><strong>التسويق المكاني والزمني:</strong> وضوح أماكن الفروع وأوقات العمل الممتدة (حتى 12 منتصف الليل).</li></ul>" },
+            { c: "Double M For Cars Accessories", d: "24 يوليو 2026", t: "تحربة مختلفه مع سماعات الافتار سماعات بقوة ٧٠ ارمس 😍", v: "https://www.facebook.com/reel/2094236301508552/", i: "https://scontent-cdg6-1.xx.fbcdn.net/v/t51.82787-10/755808149_18360335515215801_7764989577407201916_n.jpg?stp=dst-jpg_p565x565_tt6&_nc_cat=106&ccb=1-7&_nc_sid=3a9e82&_nc_ohc=oaKKUzDG-LQQ7kNvwHyyUFG&_nc_oc=Adr3P8t5KuDia_u7S9nr6I84pplE_qyAv0SgHxh45ClMXV5DOEzUxbxxA_O--cR0IUs&_nc_zt=23&_nc_ht=scontent-cdg6-1.xx&_nc_gid=DTTHZeQETQRJ7M54qifQnQ&_nc_ss=7b289&oh=00_AQBVR7hTq-hjDki5MId1LEGswrRarXeCxWgt0yIC1lYOnw&oe=6A6A4116", tr: "أنت عايز تعلي صوت السماعات؟... هتاخد معاك في العربية 70... سماعة ويعطيك صوت خيالي جداً.. دبل السماعات في الأبواب الخلفية... عيش التجربة... للمزيد من التفاصيل تواصل معانا عبر الواتساب.", s: "<ul><li><strong>الهدف التسويقي:</strong> الترويج لخدمات ترقية وتطوير أنظمة الصوت (Double Setup).</li><li><strong>عناصر الجذب:</strong> استخدام موسيقى ذات إيقاع حماسي وأسلوب التخاطب المباشر مع المشاهد.</li><li><strong>القيمة المقدمة:</strong> تقديم حل فني مباشر (تركيب سماعات مزدوجة) لتحسين التجربة الصوتية.</li><li><strong>الدعوة لاتخاذ إجراء (CTA):</strong> توجيه المشاهدين للتواصل عبر 'الواتساب' لتحويلهم لعملاء محتملين.</li></ul>" }
         ];
 
-        const grid = document.getElementById('ideasGrid');
-        const progressBar = document.getElementById('progressBar');
-
-        // Generate Cards
-        ideas.forEach((idea, index) => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" id="idea-${index}">
-                    <label for="idea-${index}" class="custom-checkbox"></label>
-                </div>
-                <div class="card-content">
-                    <div class="icon-box">
-                        <svg viewBox="0 0 24 24">${idea.icon}</svg>
-                    </div>
-                    <h2>${idea.title}</h2>
-                    <p>${idea.desc}</p>
-                </div>
-            `;
-            grid.appendChild(card);
-
-            // Add Event Listener
-            const checkbox = card.querySelector('input[type="checkbox"]');
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    card.classList.add('implemented');
-                } else {
-                    card.classList.remove('implemented');
+        function generateReport() {
+            const container = document.getElementById('reportContainer');
+            const tabsContainer = document.getElementById('tabsContainer');
+            const competitors = {};
+            
+            // تجميع البيانات حسب المنافس
+            reportData.forEach(item => {
+                if (!competitors[item.c]) {
+                    competitors[item.c] = [];
                 }
-                updateProgress();
+                competitors[item.c].push(item);
             });
-        });
 
-        // Update Progress Function
-        function updateProgress() {
-            const total = ideas.length;
-            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
-            const percentage = Math.round((checked / total) * 100);
-            progressBar.style.width = `${percentage}%`;
-            progressBar.innerText = `${percentage}% مكتمل (${checked}/${total})`;
+            let compIndex = 0;
+            const compMap = {};
+            
+            // إنشاء التبويبات
+            Object.keys(competitors).forEach(comp => {
+                compIndex++;
+                const safeId = `tab_${compIndex}`;
+                compMap[comp] = safeId;
+                
+                const btn = document.createElement('button');
+                btn.className = 'tab-btn';
+                btn.innerText = comp;
+                btn.setAttribute('onclick', `openTab(event, '${safeId}')`);
+                tabsContainer.appendChild(btn);
+            });
+
+            // إنشاء المحتوى
+            let html = '';
+            Object.keys(competitors).forEach(comp => {
+                const safeId = compMap[comp];
+                html += `<div id="${safeId}" class="tab-content">`;
+                html += `<div class="competitor-header"><h2>${comp}</h2><span class="badge">${competitors[comp].length} منشور</span></div>`;
+                
+                competitors[comp].forEach(item => {
+                    html += `
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="caption">${item.t}</span>
+                            <span class="date">${item.d}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="media">
+                                <img src="${item.i}" alt="Post Image" onerror="this.style.display='none'">
+                                <a href="${item.v}" target="_blank" class="watch-btn">مشاهدة الفيديو</a>
+                            </div>
+                            <div class="content">
+                                <div class="block transcript">
+                                    <h3>🎙️ التفريغ الصوتي</h3>
+                                    <p>${item.tr || 'لا يوجد محتوى صوتي.'}</p>
+                                </div>
+                                <div class="block">
+                                    <h3>📊 الملخص الاستراتيجي</h3>
+                                    ${item.s || '<p>لا يوجد ملخص متاح.</p>'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                
+                html += `</div>`;
+            });
+            
+            container.innerHTML = html;
         }
+
+        function openTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            const tablinks = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            if (tabName === 'all') {
+                // إظهار الكل
+                for (let i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "block";
+                }
+            } else {
+                document.getElementById(tabName).style.display = "block";
+            }
+            evt.currentTarget.className += " active";
+            
+            // إعادة ضبط البحث
+            document.getElementById('searchInput').value = '';
+            searchReport();
+        }
+
+        function searchReport() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.getElementsByClassName('card');
+            let visibleCount = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+                const cardText = cards[i].innerText.toLowerCase();
+                if (cardText.includes(searchTerm)) {
+                    cards[i].style.display = '';
+                    visibleCount++;
+                } else {
+                    cards[i].style.display = 'none';
+                }
+            }
+
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
+        generateReport();
     </script>
     <script src="auth.js"></script>
 </body>
