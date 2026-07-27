@@ -32,41 +32,36 @@
         header h1 { font-size: 2.5em; margin-bottom: 10px; }
         header p { font-size: 1.1em; opacity: 0.9; }
 
-        /* زر رفع الملفات اعلى اليسار */
-        .upload-btn-wrapper {
+        .actions-wrapper {
             position: absolute;
             top: 20px;
             left: 20px;
-            display: inline-block;
+            display: flex;
+            gap: 10px;
         }
-        .upload-btn {
+        .action-btn {
             background-color: var(--secondary);
             color: var(--primary);
-            padding: 10px 18px;
+            padding: 10px 16px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.9em;
+            font-size: 0.88em;
             cursor: pointer;
             border: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
+            text-decoration: none;
         }
-        .upload-btn:hover {
+        .action-btn:hover {
             background-color: #e0a312;
             transform: translateY(-2px);
         }
+        .upload-btn-wrapper { position: relative; overflow: hidden; display: inline-block; }
         .upload-btn-wrapper input[type=file] {
-            font-size: 100px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
+            position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
         }
 
         .controls { max-width: 1200px; margin: 0 auto 20px; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; }
@@ -112,15 +107,18 @@
             header h1 { font-size: 1.8em; }
             .competitor-header { flex-direction: column; gap: 10px; text-align: center; }
             .card-header { flex-direction: column; align-items: flex-start; }
-            .upload-btn-wrapper { position: static; margin-bottom: 15px; display: flex; justify-content: center; }
+            .actions-wrapper { position: static; margin-bottom: 15px; justify-content: center; }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="upload-btn-wrapper">
-            <button class="upload-btn">📁 رفع تقرير جديد (.md)</button>
-            <input type="file" id="mdFileInput" accept=".md" onchange="handleFileUpload(event)">
+        <div class="actions-wrapper">
+            <div class="upload-btn-wrapper">
+                <button class="action-btn">📁 رفع تقرير جديد (.md)</button>
+                <input type="file" id="mdFileInput" accept=".md" onchange="handleFileUpload(event)">
+            </div>
+            <button class="action-btn" onclick="window.downloadMDBackup()">💾 حفظ نسخة .md</button>
         </div>
         <h1>تقرير تحليل منافسي قطاع إكسسوارات السيارات</h1>
         <p>تحليل استراتيجي شامل لمحتوى الفيديو والتسويق الرقمي</p>
@@ -138,23 +136,22 @@
         <div class="no-results" id="noResults">لا توجد نتائج مطابقة لبحثك.</div>
     </div>
 
-    <!-- تضمين ملف المصادقة للحماية -->
-    <script src="auth.js"></script>
+    <!-- تضمين ملف السكريبت كـ module لتفعيل Firebase ESM -->
+    <script type="module" src="auth.js"></script>
 
     <script>
-    var reportData = []; // سيتم تعبئته ديناميكياً من ملف Markdown
+    var reportData = [];
 
-    /* ===== دالة تحويل التاريخ ===== */
     function fmtDate(iso) {
-        if (!iso) return '';
+        if (!iso) return 'غير محدد';
         var d = new Date(iso);
+        if (isNaN(d.getTime())) return iso;
         var m = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
         return d.getDate() + ' ' + m[d.getMonth()] + ' ' + d.getFullYear();
     }
 
-    /* ===== دالة تحويل Markdown إلى HTML ===== */
     function md2html(md) {
-        if (!md || md.trim() === '' || md.trim() === '*') return '<p class="na-msg">لا يتوفر</p>';
+        if (!md || md.trim() === '' || md.trim() === 'N/A' || md.trim() === '*') return '<p class="na-msg">لا يتوفر</p>';
         var h = md;
         h = h.replace(/^###\s*.+$/gm, '');
         h = h.replace(/^---+$/gm, '');
@@ -176,7 +173,6 @@
         return out.join('\n');
     }
 
-    /* ===== معالجة ورفع ملفات .md ===== */
     function handleFileUpload(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -184,36 +180,42 @@
         const reader = new FileReader();
         reader.onload = function(e) {
             const content = e.target.result;
-            parseMDAndRender(content);
+            // رفع التقرير إلى Firebase وتحديث الشاشة لجميع الأجهزة
+            if (typeof window.uploadAndSyncMD === 'function') {
+                window.uploadAndSyncMD(content);
+            } else {
+                parseMDAndRender(content);
+            }
         };
         reader.readAsText(file);
     }
 
-    /* ===== محرك تحليل ملف MD واستخراج البيانات ===== */
-    function parseMDAndRender(mdContent) {
-        const items = mdContent.split(/(?=###\s+منافس:)/g);
+    // محلل نصوص Markdown المحسّن لمطابقة الهيكل المطلوب
+    window.parseMDAndRender = function(mdContent) {
+        const items = mdContent.split(/(?=###\s+المنافس:)/g);
         var parsedData = [];
 
         items.forEach(item => {
-            if (!item.trim()) return;
+            if (!item.trim() || !item.includes('المنافس:')) return;
 
-            var c = (item.match(/###\s+منافس:\s*(.+)/) || [])[1] || '';
+            var c = (item.match(/###\s+المنافس:\s*(.+)/) || [])[1] || '';
             var d = (item.match(/\*\*التاريخ:\*\*\s*(.+)/) || [])[1] || '';
-            var t = (item.match(/\*\*العنوان:\*\*\s*(.+)/) || [])[1] || '';
+            var det = (item.match(/\*\*التفاصيل:\*\*\n\*\s*(.+)/) || item.match(/\*\*التفاصيل:\*\*\s*(.+)/) || [])[1] || '';
             var v = (item.match(/\*\*رابط الفيديو:\*\*\s*(.+)/) || [])[1] || '';
-            var i = (item.match(/\*\*صورة غلاف الفيديو:\*\*\s*(.+)/) || [])[1] || '';
-            
-            var trMatch = item.match(/\*\*التفريغ النصي:\*\*\n([\s\S]*?)(?=\*\*الملخص الاستراتيجي:\*\*|$)/);
+            var imgMatch = item.match(/\*\*صورة المنشور:\*\*\n\*\s*(https?:\/\/[^\s]+)/) || item.match(/\*\*صورة المنشور:\*\*\s*(https?:\/\/[^\s]+)/);
+            var i = imgMatch ? imgMatch[1] : '';
+
+            var trMatch = item.match(/\*\*محتوى الفيديو \(تفريغ صوتي\):\*\*\n([\s\S]*?)(?=\n---\n|\*\*ملخص الفيديو:\*\*|$)/);
             var tr = trMatch ? trMatch[1].trim() : '';
 
-            var sMatch = item.match(/\*\*الملخص الاستراتيجي:\*\*\n([\s\S]*?)$/);
+            var sMatch = item.match(/\*\*ملخص الفيديو:\*\*\n([\s\S]*?)(?=\n---\n|$)/);
             var s = sMatch ? sMatch[1].trim() : '';
 
-            if (c || t) {
+            if (c) {
                 parsedData.push({
                     c: c.trim(),
                     d: d.trim(),
-                    t: t.trim(),
+                    t: det.trim(),
                     v: v.trim(),
                     i: i.trim(),
                     tr: tr,
@@ -225,12 +227,9 @@
         if (parsedData.length > 0) {
             reportData = parsedData;
             renderReport();
-        } else {
-            alert('تعذر قراءة بيانات التقرير من الملف، يرجى التأكد من الصيغة.');
         }
-    }
+    };
 
-    /* ===== دالة بناء واجهة التقرير الديناميكية ===== */
     function renderReport() {
         var container = document.getElementById('reportContainer');
         var tabsContainer = document.getElementById('tabsContainer');
@@ -242,10 +241,8 @@
 
         if (!reportData || reportData.length === 0) return;
 
-        // استخراج المنافسين الفريدين
         var competitors = [...new Set(reportData.map(item => item.c))];
 
-        // 1. بناء أزرار التنقل (Tabs)
         var allTab = document.createElement('button');
         allTab.className = 'tab-btn active';
         allTab.innerText = 'الكل (' + reportData.length + ')';
@@ -261,13 +258,11 @@
             tabsContainer.appendChild(btn);
         });
 
-        // 2. بناء شريط الإحصائيات
         statsBar.innerHTML = `
             <div class="stat-chip">إجمالي المنشورات المحللة: <strong>${reportData.length}</strong></div>
             <div class="stat-chip">عدد المنافسين: <strong>${competitors.length}</strong></div>
         `;
 
-        // 3. بناء أقسام المحتوى
         competitors.forEach((comp, idx) => {
             var compItems = reportData.filter(x => x.c === comp);
             var section = document.createElement('div');
@@ -277,24 +272,24 @@
             var compHeader = `
                 <div class="competitor-header">
                     <h2>${comp}</h2>
-                    <span class="badge">${compItems.length} فيديو</span>
+                    <span class="badge">${compItems.length} منشور / فيديو</span>
                 </div>
             `;
             
             var cardsHTML = compItems.map(item => `
                 <div class="card" data-search="${(item.c + ' ' + item.t + ' ' + item.tr + ' ' + item.s).toLowerCase()}">
                     <div class="card-header">
-                        <span class="caption">${item.t}</span>
+                        <span class="caption">${item.t || 'تحليل مقطع فيديو'}</span>
                         <span class="date">${fmtDate(item.d)}</span>
                     </div>
                     <div class="card-body">
                         <div class="media">
-                            ${item.i ? `<img src="${item.i}" alt="${item.t}" loading="lazy">` : ''}
-                            ${item.v ? `<a href="${item.v}" target="_blank" class="watch-btn">▶ مشاهدة الفيديو</a>` : ''}
+                            ${item.i ? `<img src="${item.i}" alt="صورة المنشور" loading="lazy">` : ''}
+                            ${item.v ? `<a href="${item.v}" target="_blank" class="watch-btn">▶ مشاهدة المنشور/الفيديو</a>` : ''}
                         </div>
                         <div class="content">
                             <div class="block transcript">
-                                <h3>📝 التفريغ النصي:</h3>
+                                <h3>📝 التفريغ النصي / محتوى الفيديو:</h3>
                                 ${md2html(item.tr)}
                             </div>
                             <div class="block">
@@ -311,7 +306,6 @@
         });
     }
 
-    /* ===== التحكم في التبويبات ===== */
     function switchTab(tabId, btn) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -326,7 +320,6 @@
         }
     }
 
-    /* ===== دالة البحث الفوري ===== */
     function searchReport() {
         var query = document.getElementById('searchInput').value.toLowerCase().trim();
         var cards = document.querySelectorAll('.card');
