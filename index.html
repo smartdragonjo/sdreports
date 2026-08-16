@@ -1,288 +1,150 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تقرير تحليل المنافسين الشامل - إكسسوارات السيارات</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1e3a5f;
-            --secondary: #f4b41a;
-            --accent: #e63946;
-            --bg: #f0f4f8;
-            --card-bg: #ffffff;
-            --text: #333;
-            --light-text: #666;
-            --radius: 12px;
-            --shadow: 0 4px 6px rgba(0,0,0,0.05);
-            --hover-shadow: 0 10px 15px rgba(0,0,0,0.1);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
-        
-        header { 
-            background: linear-gradient(135deg, var(--primary), #15293f); 
-            color: white; 
-            padding: 40px 20px; 
-            text-align: center; 
-            margin-bottom: 30px; 
-            position: relative; 
-        }
-        header h1 { font-size: 2.5em; margin-bottom: 10px; }
-        header p { font-size: 1.1em; opacity: 0.9; }
 
-        .actions-wrapper {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        .action-btn {
-            background-color: var(--secondary);
-            color: var(--primary);
-            padding: 10px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.88em;
-            cursor: pointer;
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-            text-decoration: none;
-        }
-        .action-btn:hover {
-            background-color: #e0a312;
-            transform: translateY(-2px);
-        }
-        .upload-btn-wrapper { position: relative; overflow: hidden; display: inline-block; }
-        .upload-btn-wrapper input[type=file] {
-            position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
-        }
 
-        .controls { max-width: 1200px; margin: 0 auto 20px; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; }
-        .search-box { flex: 1 1 300px; max-width: 400px; padding: 12px 20px; border: 2px solid var(--primary); border-radius: 30px; font-family: 'Cairo'; font-size: 1em; outline: none; transition: border-color 0.3s; }
-        .search-box:focus { border-color: var(--secondary); }
-        .tabs-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        .tab-btn { background: white; color: var(--primary); border: 2px solid var(--primary); padding: 8px 20px; border-radius: 30px; font-family: 'Cairo'; font-weight: 700; cursor: pointer; transition: all 0.3s; }
-        .tab-btn:hover, .tab-btn.active { background: var(--primary); color: white; }
-        .stats-bar { max-width: 1200px; margin: 0 auto 20px; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-        .stat-chip { background: white; border: 1px solid #e1e8ed; padding: 6px 16px; border-radius: 20px; font-size: 0.88em; color: var(--light-text); font-weight: 600; }
-        .stat-chip strong { color: var(--primary); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 50px; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .competitor-header { display: flex; justify-content: space-between; align-items: center; background: var(--primary); color: white; padding: 15px 25px; border-radius: var(--radius); margin-bottom: 25px; }
-        .competitor-header h2 { font-size: 1.5em; }
-        .badge { background: var(--secondary); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.9em; }
-        .card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #e1e8ed; }
-        .card:hover { transform: translateY(-5px); box-shadow: var(--hover-shadow); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: #f8fafc; border-bottom: 1px solid #e1e8ed; gap: 10px; }
-        .caption { font-weight: 700; color: var(--primary); font-size: 1.05em; flex: 1; }
-        .date { color: var(--light-text); font-weight: 600; font-size: 0.9em; white-space: nowrap; }
-        .card-body { display: flex; flex-wrap: wrap; padding: 20px; }
-        .media { flex: 1 1 300px; margin-left: 20px; margin-bottom: 20px; }
-        .media img { width: 100%; border-radius: 8px; height: auto; margin-bottom: 15px; border: 1px solid #eee; }
-        .watch-btn { display: block; background: var(--accent); color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: 700; text-align: center; transition: background 0.3s; font-family: 'Cairo'; }
-        .watch-btn:hover { background: #c1121f; }
-        .content { flex: 2 1 600px; }
-        .block { margin-bottom: 20px; background: #fdfdfd; border-right: 4px solid var(--secondary); padding: 15px; border-radius: 0 8px 8px 0; }
-        .block h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.1em; }
-        .block p, .block li { color: #444; font-size: 0.95em; margin-bottom: 8px; }
-        .block ul { padding-right: 20px; list-style-type: disc; }
-        .block ul li { margin-bottom: 6px; line-height: 1.7; }
-        .transcript { background: #eef2f7; border-right-color: var(--primary); }
-        .transcript p { font-style: italic; white-space: pre-line; }
-        .na-msg { color: #999; font-style: italic; text-align: center; padding: 10px; }
-        .no-results { text-align: center; padding: 40px; color: var(--light-text); font-size: 1.2em; display: none; }
-        
-        @media (max-width: 768px) {
-            .card-body { flex-direction: column; }
-            .media { margin-left: 0; width: 100%; }
-            header h1 { font-size: 1.8em; }
-            .competitor-header { flex-direction: column; gap: 10px; text-align: center; }
-            .card-header { flex-direction: column; align-items: flex-start; }
-            .actions-wrapper { position: static; margin-bottom: 15px; justify-content: center; }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="actions-wrapper">
-            <div class="upload-btn-wrapper">
-                <button class="action-btn">📁 رفع تقرير جديد (.md)</button>
-                <input type="file" id="mdFileInput" accept=".md" onchange="handleFileUpload(event)">
-            </div>
-            <button class="action-btn" onclick="window.downloadMDBackup()">💾 حفظ نسخة .md</button>
-        </div>
-        <h1>تقرير تحليل منافسي قطاع إكسسوارات السيارات</h1>
-        <p>تحليل استراتيجي شامل لمحتوى الفيديو والتسويق الرقمي</p>
-    </header>
 
-    <div class="controls">
-        <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث في التقرير (اسم منتج، استراتيجية، منافس...)" oninput="searchReport()">
-        <div class="tabs-container" id="tabsContainer"></div>
-    </div>
+index(5).html
+الملف
 
-    <div class="stats-bar" id="statsBar"></div>
+auth(1).js
+JavaScript
+تقرير المنافسين (يوجد لها firebase مستقل)
 
-    <div class="container">
-        <div id="reportContainer"></div>
-        <div class="no-results" id="noResults">لا توجد نتائج مطابقة لبحثك.</div>
-    </div>
+da216f38-c230-44af-9749-b04afca71f02.png
+نفس الشيء هذا ما يظهر اعطني الكود وانا اعدله بدلا من محاولة تنزيل الملف
 
-    <!-- تضمين ملف السكريبت كـ module لتفعيل Firebase ESM -->
-    <script type="module" src="auth.js"></script>
+ممتاز. الآن الخطوة الأهم: Firestore Rules.
 
-    <script>
-    var reportData = [];
+اذهب إلى:
 
-    function fmtDate(iso) {
-        if (!iso) return 'غير محدد';
-        var d = new Date(iso);
-        if (isNaN(d.getTime())) return iso;
-        var m = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-        return d.getDate() + ' ' + m[d.getMonth()] + ' ' + d.getFullYear();
+Firebase Console → Firestore Database → Rules
+
+واستبدل القواعد الحالية بهذه:
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /reports/competitor_latest {
+
+      // قراءة التقرير متاحة للجميع
+      // لأن كلمة السر 868755 تتحكم بالمشاهدة من واجهة الموقع
+      allow read: if true;
+
+      // رفع أو تعديل التقرير مسموح فقط للحساب الإداري
+      allow write: if request.auth != null
+                   && request.auth.token.email == "smartdragonjordan@gmail.com"
+                   && request.auth.token.email_verified == true;
     }
+  }
+}
+ثم اضغط Publish.
 
-    function md2html(md) {
-        if (!md || md.trim() === '' || md.trim() === 'N/A' || md.trim() === '*') return '<p class="na-msg">لا يتوفر</p>';
-        var h = md;
-        h = h.replace(/^###\s*.+$/gm, '');
-        h = h.replace(/^---+$/gm, '');
-        h = h.replace(/^\*\*\[(.+?)\]\(.*?\)\*\*:?\s*(.*)$/gm, '<li><strong>$1:</strong> $2</li>');
-        h = h.replace(/^\*\*\*(.+?)\*\*\*:?\s*(.*)$/gm, '<li><strong>$1:</strong> $2</li>');
-        h = h.replace(/^\*\s*\*\*(.+?)\*\*:?\s*(.*)$/gm, '<li><strong>$1:</strong> $2</li>');
-        h = h.replace(/^\*\s+(.+)$/gm, '<li>$1</li>');
-        h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-        h = h.replace(/((?:<li>[\s\S]*?<\/li>\s*)+)/g, '<ul>$1</ul>');
-        h = h.replace(/<\/ul>\s*<ul>/g, '');
-        var lines = h.split('\n');
-        var out = [];
-        for (var i = 0; i < lines.length; i++) {
-            var ln = lines[i].trim();
-            if (ln === '') continue;
-            if (ln.indexOf('<') === 0) { out.push(ln); }
-            else { out.push('<p>' + ln + '</p>'); }
-        }
-        return out.join('\n');
-    }
+هذه النقطة هي الحماية الفعلية للرفع: الكود الحالي يستخدم setDoc لتحديث reports/competitor_latest، 
 
-    function handleFileUpload(event) {
-        const file = event.target.files[0];
-        if (!file) return;
+ وبالتالي حتى لو شخص يعرف 868755 وحاول التحايل على إخفاء الأزرار، Firestore نفسه لن يسمح له بالكتابة دون تسجيل الدخول بالحساب الإداري.
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const content = e.target.result;
-            // رفع التقرير إلى Firebase وتحديث الشاشة لجميع الأجهزة
-            if (typeof window.uploadAndSyncMD === 'function') {
-                window.uploadAndSyncMD(content);
-            } else {
-                parseMDAndRender(content);
-            }
-        };
-        reader.readAsText(file);
-    }
+أما allow read: if true فهو مقصود لأننا نريد إبقاء طريقة المشاهدة الحالية بكلمة السر.
 
-    // محلل نصوص Markdown المحسّن لمطابقة الهيكل المطلوب
-    window.parseMDAndRender = function(mdContent) {
-        const items = mdContent.split(/(?=###\s+المنافس:)/g);
-        var parsedData = [];
+بعد الضغط على Publish قل لي تم، وبعدها نختبر الحالتين عمليًا:
+868755 → مشاهدة بدون أزرار، وGoogle → مشاهدة مع الأزرار والرفع.
 
-        items.forEach(item => {
-            if (!item.trim() || !item.includes('المنافس:')) return;
 
-            var c = (item.match(/###\s+المنافس:\s*(.+)/) || [])[1] || '';
-            var d = (item.match(/\*\*التاريخ:\*\*\s*(.+)/) || [])[1] || '';
-            var det = (item.match(/\*\*التفاصيل:\*\*\n\*\s*(.+)/) || item.match(/\*\*التفاصيل:\*\*\s*(.+)/) || [])[1] || '';
-            var v = (item.match(/\*\*رابط الفيديو:\*\*\s*(.+)/) || [])[1] || '';
-            var imgMatch = item.match(/\*\*صورة المنشور:\*\*\n\*\s*(https?:\/\/[^\s]+)/) || item.match(/\*\*صورة المنشور:\*\*\s*(https?:\/\/[^\s]+)/);
-            var i = imgMatch ? imgMatch[1] : '';
+تم
 
-            var trMatch = item.match(/\*\*محتوى الفيديو \(تفريغ صوتي\):\*\*\n([\s\S]*?)(?=\n---\n|\*\*ملخص الفيديو:\*\*|$)/);
-            var tr = trMatch ? trMatch[1].trim() : '';
+ممتاز. الآن الحماية من جهة Firestore جاهزة.
 
-            var sMatch = item.match(/\*\*ملخص الفيديو:\*\*\n([\s\S]*?)(?=\n---\n|$)/);
-            var s = sMatch ? sMatch[1].trim() : '';
+اختبر الموقع من الرابط نفسه، ويفضل في نافذة Incognito حتى لا تؤثر جلسة Google القديمة:
 
-            if (c) {
-                parsedData.push({
-                    c: c.trim(),
-                    d: d.trim(),
-                    t: det.trim(),
-                    v: v.trim(),
-                    i: i.trim(),
-                    tr: tr,
-                    s: s
-                });
-            }
-        });
+ادخل أولًا باستخدام كلمة السر 868755. المفروض يفتح التقرير بشكل طبيعي، ولا تظهر أزرار رفع التقرير أو حفظ نسخة .md.
 
-        if (parsedData.length > 0) {
-            reportData = parsedData;
-            renderReport();
-        }
-    };
+بعدها افتح نافذة Incognito جديدة واضغط «دخول الإدارة بحساب Google» واختر smartdragonjordan@gmail.com. المفروض يفتح التقرير وتظهر أزرار الرفع والتنزيل.
 
-    function renderReport() {
-        var container = document.getElementById('reportContainer');
-        var tabsContainer = document.getElementById('tabsContainer');
-        var statsBar = document.getElementById('statsBar');
-        
-        container.innerHTML = '';
-        tabsContainer.innerHTML = '';
-        statsBar.innerHTML = '';
+جرّب رفع ملف .md صغير بالحساب الإداري للتأكد أن Firestore يقبل الكتابة.
 
-        if (!reportData || reportData.length === 0) return;
+إذا نجحت الحالتان، يكون المشروع الأول منتهيًا ولا نلمس شيئًا آخر فيه، ثم ننتقل للمشروع الثاني.
 
-        var competitors = [...new Set(reportData.map(item => item.c))];
 
-        var allTab = document.createElement('button');
-        allTab.className = 'tab-btn active';
-        allTab.innerText = 'الكل (' + reportData.length + ')';
-        allTab.onclick = function() { switchTab('all', this); };
-        tabsContainer.appendChild(allTab);
+تمام قبل ذلك طلبت مني بالبداية استبدال ملف index.html وهذا نزل معي واستبدلته هل سوف يؤثر ام انني احتاج لارجاع النسخة القديمة؟
 
-        competitors.forEach((comp, idx) => {
-            var count = reportData.filter(x => x.c === comp).length;
-            var btn = document.createElement('button');
-            btn.className = 'tab-btn';
-            btn.innerText = comp + ' (' + count + ')';
-            btn.onclick = function() { switchTab('comp-' + idx, this); };
-            tabsContainer.appendChild(btn);
-        });
+نعم، هنا أريد أن نصحح المسار قبل الاختبار: الأفضل أن ترجع index.html الأصلي الذي أرسلته لي في البداية.
 
-        statsBar.innerHTML = `
-            <div class="stat-chip">إجمالي المنشورات المحللة: <strong>${reportData.length}</strong></div>
-            <div class="stat-chip">عدد المنافسين: <strong>${competitors.length}</strong></div>
-        `;
+السبب أن التعديل المطلوب أصبح كله داخل auth.js، والـindex.html الأصلي يحتوي أصلًا على أزرار الرفع والتنزيل داخل .actions-wrapper 
 
-        competitors.forEach((comp, idx) => {
-            var compItems = reportData.filter(x => x.c === comp);
-            var section = document.createElement('div');
-            section.className = 'tab-content active';
-            section.id = 'comp-' + idx;
+ ويستدعي auth.js كـ module بشكل صحيح. 
 
-            var compHeader = `
-                <div class="competitor-header">
-                    <h2>${comp}</h2>
-                    <span class="badge">${compItems.length} منشور / فيديو</span>
-                </div>
-            `;
-            
-            var cardsHTML = compItems.map(item => `
-                <div class="card" data-search="${(item.c + ' ' + item.t + ' ' + item.tr + ' ' + item.s).toLowerCase()}">
-                    <div class="card-header">
-                        <span class="caption">${item.t || 'تحليل مقطع فيديو'}</span>
-                        <span class="date">${fmtDate(item.d)}</span>
-                    </div>
-                    <div class="card-body">
+
+إذن الوضع النهائي الذي أريده:
+
+index.html = النسخة الأصلية التي أرسلتها لي أول مرة.
+auth.js = الكود الجديد الذي نسخته يدويًا قبل قليل.
+
+هذا أكثر أمانًا أيضًا لأننا بذلك نضمن أننا لم نغيّر أي شيء في تصميم أو وظائف التقرير الأصلية دون داعٍ.
+
+أرجع index.html الأصلي، واترك auth.js الجديد، ثم نختبر.
+
+
+
+المكتبة
+/
+index(5).html
+المزيد من الإجراءات
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
                         <div class="media">
                             ${item.i ? `<img src="${item.i}" alt="صورة المنشور" loading="lazy">` : ''}
                             ${item.v ? `<a href="${item.v}" target="_blank" class="watch-btn">▶ مشاهدة المنشور/الفيديو</a>` : ''}
@@ -340,3 +202,4 @@
     </script>
 </body>
 </html>
+
