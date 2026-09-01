@@ -499,6 +499,13 @@ function listenToLiveReport() {
                     window.rawMDContent =
                         data.rawMD;
 
+                    window.reportUploadedAt =
+                        data.updatedAt || null;
+
+                    if (typeof window.updateReportUploadedAt === "function") {
+                        window.updateReportUploadedAt(window.reportUploadedAt);
+                    }
+
 
                     window.parseMDAndRender(
                         data.rawMD
