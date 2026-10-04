@@ -188,8 +188,7 @@
         var explicit = cleanOfferText(explicitValue);
         if (explicit && !/^(?:N\/?A|لا يوجد|غير متوفر)$/i.test(explicit)) return explicit;
 
-        var lines = (transcript || '').split(/?
-/).map(cleanOfferText).filter(Boolean);
+        var lines = (transcript || '').split(/\r?\n/).map(cleanOfferText).filter(Boolean);
         var currency = /(?:\d+(?:[.,]\d+)?\s*(?:دينار(?:اً|ا)?|دنانير|د\.\s*أ|JD|JOD|قرش(?:اً|ا)?|قروش)|(?:دينار(?:اً|ا)?|دنانير|قرش(?:اً|ا)?|قروش)\s*\d+(?:[.,]\d+)?)/iu;
         var percent = /\d+(?:[.,]\d+)?\s*%/u;
         var priceWords = /(?:عرض|بدل(?:اً|ا)?\s+من|فقط|بس|سعر|بـ)/u;
@@ -213,8 +212,7 @@
         h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
         h = h.replace(/((?:<li>[\s\S]*?<\/li>\s*)+)/g, '<ul>$1</ul>');
         h = h.replace(/<\/ul>\s*<ul>/g, '');
-        var lines = h.split('
-');
+        var lines = h.split('\n');
         var out = [];
         for (var i = 0; i < lines.length; i++) {
             var ln = lines[i].trim();
@@ -222,8 +220,7 @@
             if (ln.indexOf('<') === 0) { out.push(ln); }
             else { out.push('<p>' + ln + '</p>'); }
         }
-        return out.join('
-');
+        return out.join('\n');
     }
 
     function handleFileUpload(event) {
@@ -253,23 +250,15 @@
 
             var c = (item.match(/###\s+المنافس:\s*(.+)/) || [])[1] || '';
             var d = (item.match(/\*\*التاريخ:\*\*\s*(.+)/) || [])[1] || '';
-            var det = (item.match(/\*\*التفاصيل:\*\*
-\*\s*(.+)/) || item.match(/\*\*التفاصيل:\*\*\s*(.+)/) || [])[1] || '';
+            var det = (item.match(/\*\*التفاصيل:\*\*\n\*\s*(.+)/) || item.match(/\*\*التفاصيل:\*\*\s*(.+)/) || [])[1] || '';
             var v = (item.match(/\*\*رابط الفيديو:\*\*\s*(.+)/) || [])[1] || '';
-            var imgMatch = item.match(/\*\*صورة المنشور:\*\*
-\*\s*(https?:\/\/[^\s]+)/) || item.match(/\*\*صورة المنشور:\*\*\s*(https?:\/\/[^\s]+)/);
+            var imgMatch = item.match(/\*\*صورة المنشور:\*\*\n\*\s*(https?:\/\/[^\s]+)/) || item.match(/\*\*صورة المنشور:\*\*\s*(https?:\/\/[^\s]+)/);
             var i = imgMatch ? imgMatch[1] : '';
 
-            var trMatch = item.match(/\*\*محتوى الفيديو \(تفريغ صوتي(?:\/تحليل بديل عند التعذر)?\):\*\*
-([\s\S]*?)(?=
----
-|\*\*ملخص الفيديو:\*\*|$)/);
+            var trMatch = item.match(/\*\*محتوى الفيديو \(تفريغ صوتي(?:\/تحليل بديل عند التعذر)?\):\*\*\n([\s\S]*?)(?=\n---\n|\*\*ملخص الفيديو:\*\*|$)/);
             var tr = trMatch ? trMatch[1].trim() : '';
 
-            var sMatch = item.match(/\*\*ملخص الفيديو:\*\*
-([\s\S]*?)(?=
----
-|$)/);
+            var sMatch = item.match(/\*\*ملخص الفيديو:\*\*\n([\s\S]*?)(?=\n---\n|$)/);
             var s = sMatch ? sMatch[1].trim() : '';
 
             var offerMatch = item.match(/\*\*(?:السعر أو العرض المستخرج|السعر\/العرض|العرض المستخرج):\*\*\s*(.+)/);
