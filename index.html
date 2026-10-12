@@ -183,21 +183,49 @@
         return (text || '').replace(/[*_`#>]/g, '').replace(/\s+/g, ' ').trim();
     }
 
-    // يفضّل الحقل المنظم الذي ينشئه الذكاء الصناعي، مع كاشف احتياطي صارم للتقارير القديمة.
+    // Validate both sources and return only the numeric price/discount phrase.
     function detectPriceOrOffer(explicitValue, transcript) {
-        var explicit = cleanOfferText(explicitValue);
-        if (explicit && !/^(?:N\/?A|لا يوجد|غير متوفر)$/i.test(explicit)) return explicit;
-
-        var lines = (transcript || '').split(/\r?\n/).map(cleanOfferText).filter(Boolean);
-        var currency = /(?:\d+(?:[.,]\d+)?\s*(?:دينار(?:اً|ا)?|دنانير|د\.\s*أ|JD|JOD|قرش(?:اً|ا)?|قروش)|(?:دينار(?:اً|ا)?|دنانير|قرش(?:اً|ا)?|قروش)\s*\d+(?:[.,]\d+)?)/iu;
-        var percent = /\d+(?:[.,]\d+)?\s*%/u;
-        var priceWords = /(?:عرض|بدل(?:اً|ا)?\s+من|فقط|بس|سعر|بـ)/u;
-        var discountWords = /(?:خصم|تخفيض|تنزيل)/u;
-        var candidates = lines.filter(function(line) {
-            return (currency.test(line) && priceWords.test(line)) || (percent.test(line) && discountWords.test(line));
-        });
-        if (!candidates.length) return '';
-        return candidates.slice(0, 2).join(' — ').slice(0, 220);
+        function extract(value) {
+            var text = cleanOfferText(value);
+            if (!text) return '';
+            // Normalize digits for matching without changing the displayed phrase.
+            var normalized = text.replace(/[٠-٩۰-۹]/g, function(digit) {
+                var code = digit.charCodeAt(0);
+                return String(code >= 1776 ? code - 1776 : code - 1632);
+            }).replace(/[٫٬]/g, '.');
+            var number = String.raw`[0-9]{1,6}(?:[.,][0-9]{1,3})?`;
+            var currency = String.raw`(?:دينار(?:اً|ا|ًا)?|دنانير|د\.[ ]*أ\.?|دأ|JOD\b|JD\b|قرش(?:اً|ا|ًا)?|قروش)`;
+            var amount = number + '\\s*' + currency;
+            var discount = '(?:خصم|تخفيض|تنزيل|وفر|وفّر|توفير)';
+            var price = '(?:السعر|سعر|بسعر|بسعره|بمبلغ)';
+            var patterns = [
+                discount + '\\s*(?:(?:بقيمة|بمقدار|بنسبة|يصل إلى|حتى|قدره)\\s*)?' + number + '\\s*[%٪]',
+                discount + '\\s*(?:(?:بقيمة|بمقدار|قدره)\\s*)?' + amount,
+                '(?:' + price + '\\s*[:：]?\\s*)?' + amount + '(?:\\s*(?:بدل(?:اً|ا)?(?:\\s+من)?|عوضاً عن)\\s*' + number + '(?:\\s*' + currency + ')?)?',
+                currency + '\\s*' + number,
+                price + '\\s*[:：]?\\s*' + number + '(?:\\s*(?:بدل(?:اً|ا)?(?:\\s+من)?)\\s*' + number + ')?'
+            ];
+            var matches = [];
+            patterns.forEach(function(pattern) {
+                var regex = new RegExp(pattern, 'giu');
+                var match;
+                while ((match = regex.exec(normalized))) {
+                    var before = normalized.slice(0, match.index);
+                    var after = normalized.slice(match.index + match[0].length);
+                    // Never take part of a phone/model number or a specification.
+                    if (/[\p{L}\p{N}%.+\-]$/u.test(before) || /^[\p{L}\p{N}%٪]/u.test(after)) continue;
+                    if (/^\s*(?:[%٪]|واط|وات|w\b|volt\b|فولت|حصان|horsepower\b|موديل|لتر|سي سي|cc\b)/iu.test(after)) continue;
+                    matches.push({ start: match.index, end: regex.lastIndex });
+                }
+            });
+            matches.sort(function(a, b) { return a.start - b.start || b.end - a.end; });
+            var selected = [];
+            matches.forEach(function(match) {
+                if (selected.length < 2 && !selected.some(function(other) { return match.start < other.end && match.end > other.start; })) selected.push(match);
+            });
+            return selected.map(function(match) { return text.slice(match.start, match.end); }).join(' — ');
+        }
+        return extract(explicitValue) || extract(transcript);
     }
 
     function md2html(md) {
@@ -261,7 +289,7 @@
             var sMatch = item.match(/\*\*ملخص الفيديو:\*\*\n([\s\S]*?)(?=\n---\n|$)/);
             var s = sMatch ? sMatch[1].trim() : '';
 
-            var offerMatch = item.match(/\*\*(?:السعر أو العرض المستخرج|السعر\/العرض|العرض المستخرج):\*\*\s*(.+)/);
+            var offerMatch = item.match(/\*\*(?:السعر أو العرض المستخرج|السعر\/العرض|العرض المستخرج):\*\*[ \t]*([^\r\n]*)/);
             var offer = detectPriceOrOffer(offerMatch ? offerMatch[1] : '', tr);
 
             if (c) {
